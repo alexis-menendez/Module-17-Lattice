@@ -3,6 +3,7 @@ import { Schema, model, Document, Types } from 'mongoose';
 interface IUser extends Document {
   username: string;
   email: string;
+  password:string;
   thoughts: Types.ObjectId[];
   friends: Types.ObjectId[];
   getFriends: number;
@@ -44,7 +45,7 @@ const userSchema = new Schema<IUser>(
 
 userSchema
   .virtual('friendCount')
-  // Getter
+
   .get(function (this: IUser) {
     return `${this.friends.length}`;
   })
