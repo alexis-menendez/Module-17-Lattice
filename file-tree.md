@@ -37,7 +37,7 @@ Module-17-Lattice/
 │   │    |    | 
 │   │    |    ├── FormInput.jsx
 │   │    |    | 
-│   │    |    ├── FormTextera.jsx
+│   │    |    ├── FormTextarea.jsx
 │   │    |    | 
 │   │    |    ├── LoadingSpinner.jsx
 │   │    |    | 
@@ -73,7 +73,7 @@ Module-17-Lattice/
 │   │    |    | 
 │   │    |    ├── EditThought.jsx
 │   │    |    | 
-│   │    |    ├── Friends.jsx
+│   │    |    ├── FriendsList.jsx
 │   │    |    | 
 │   │    |    ├── Home.jsx
 │   │    |    | 
@@ -127,10 +127,7 @@ Module-17-Lattice/
 │   └── vitest.config.js              
 │
 │   
-├── server/                     # Backend
-│   ├── db/ 
-│   │    └── schema.sql  
-│   │                  
+├── server/                     # Backend               
 │   ├── src/ 
 │   │    ├── config/
 │   │    |    └── connection.ts
