@@ -12,7 +12,6 @@ export interface IThought extends Document {
   createdAt: Date;
   username: string;
   reactions: IReaction[];
-  getReactions: number;
 }
 
 const reactionSchema = new Schema<IReaction>(
@@ -33,8 +32,8 @@ const reactionSchema = new Schema<IReaction>(
     createdAt: {
       type: Date,
       default: Date.now,
+    },
   },
-},
   {
     toJSON: {
       virtuals: true,
@@ -49,13 +48,12 @@ const thoughtSchema = new Schema<IThought>(
       type: String,
       required: true,
       minlength: 1,
-      maxlength: 280, 
+      maxlength: 280,
     },
     createdAt: {
       type: Date,
       default: Date.now,
     },
-
     username: { type: String, required: true },
     reactions: [reactionSchema],
   },
@@ -67,12 +65,11 @@ const thoughtSchema = new Schema<IThought>(
   }
 );
 
-thoughtSchema
- .virtual('reactionCount')
-  .get(function (this: IThought) {
-    return this.reactions.length;
-  });
+// Virtual for reaction count
+thoughtSchema.virtual('reactionCount').get(function (this: IThought) {
+  return this.reactions.length;
+});
 
-const reactionThought = model('reactThought', thoughtSchema);
+const Thought = model<IThought>('Thought', thoughtSchema);
 
-export default reactionThought;
+export default Thought;

@@ -16,6 +16,7 @@
   
       /* Interop Constraints */
       "esModuleInterop": true,
+      "resolveJsonModule": true,
       "allowSyntheticDefaultImports": true,
       "forceConsistentCasingInFileNames": true,
   

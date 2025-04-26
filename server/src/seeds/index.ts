@@ -22,7 +22,7 @@ const seedAll = async () => {
     // Clear existing documents
     await User.deleteMany({});
     await Thought.deleteMany({});
-    console.log('✅ Existing data cleared.');
+    console.log('Existing data cleared.');
 
     // Insert seed data
     await User.insertMany(userSeeds);
