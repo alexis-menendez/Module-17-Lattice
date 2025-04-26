@@ -1,42 +1,34 @@
 {
-    "name": "server",
-    "version": "1.0.0",
-    "description": "Social network for Fungi Enthusiasts",
-    "main": "server.js",
-    "type": "module",
-    "scripts": {
-        "build": "npx tsc",
-        "start": "npm run build && node dist/server.js --ignore client",
-        "dev": "npx nodemon",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "seed": "node dist/seeds/index.js"
-    },
-    "nodemonConfig": {
-      "watch": [
-        "src"
-      ],
-      "ext": "ts,json,js",
-      "exec": "npx tsc && node dist/server.js"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "bcrypt": "^5.1.1",
-        "dotenv": "^16.5.0",
-        "express": "^4.21.2",
-        "jsonwebtoken": "^9.0.2",
-        "pg": "^8.11.5",
-        "mongoose": "^8.5.3",
-        "dayjs": "^1.11.13"
-    },
-    "devDependencies": {
-        "@types/bcrypt": "^5.0.2",
-        "@types/express": "^4.17.21",
-        "@types/jsonwebtoken": "^9.0.6",
-        "@types/node": "^22.14.1",
-        "@types/mongoose": "^5.11.96",
-        "typescript": "^5.5.4",
-        "nodemon": "^3.1.0"
-    }
+  "name": "lattice",
+  "version": "1.0.0",
+  "description": "Social network for Fungi Enthusiasts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "install-all": "cd server && npm i && cd ../client && npm i",
+    
+    "start": "npm run build && npm run serve",
+    "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
+    
+    "build": "npm run client:build && npm run server:build",
+    "client:build": "cd client && npm run build",
+    "server:build": "cd server && npm run build",
+    
+    "client:dev": "cd client && npm run dev",
+    "server:dev": "cd server && npm run dev",
+    
+    "serve": "cd server && npm start",
+    "seed": "cd server && npm run seed",
+
+    "test": "npm run test:dev",
+    "test:dev": "concurrently \"npm run server:dev:test\" \"wait-on tcp:3001 && npm run client:dev:test\"",
+    "server:dev:test": "cd server && npm run dev:test",
+    "client:dev:test": "cd client && npm run dev:test",
+    
+    "render-build": "npm install && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "wait-on": "^7.2.0"
   }
+}
