@@ -5,12 +5,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "install-all": "cd server && npm i && cd ../client && npm i",
+    "install-all": "npm install --prefix server && npm install --prefix client",
     
-    "start": "npm run build && npm run serve",
+    "start": "npm run start:prod",
     "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
     
-    "build": "npm run client:build && npm run server:build",
+    "build": "npm run server:build && npm run client:build",
     "client:build": "cd client && npm run build",
     "server:build": "cd server && npm run build",
     
@@ -25,7 +25,8 @@
     "server:dev:test": "cd server && npm run dev:test",
     "client:dev:test": "cd client && npm run dev:test",
     
-    "render-build": "npm install && npm run build"
+    "render-build": "npm install && npm run build",
+    "start:prod": "npm run build && npm run serve"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
