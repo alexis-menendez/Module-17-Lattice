@@ -4,6 +4,7 @@
     "version": "1.0.0",
     "description": "Lattice Client - Frontend for Social Network",
     "type": "module",
+    "proxy": "http://localhost:3001",
     "scripts": {
         "build": "vite build",
         "dev": "vite",

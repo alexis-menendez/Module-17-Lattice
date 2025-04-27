@@ -1,10 +1,13 @@
 // Module-17-Lattice/client/src/api/authAPI.jsx
 
+// Automatically use the right API base URL depending on environment
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+
 const login = async (userInfo) => {
   console.log('User info being sent to login:', userInfo);
 
   try {
-    const response = await fetch('/auth/login', {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -30,7 +33,7 @@ const signup = async (userInfo) => {
   console.log('User info being sent to signup:', userInfo);
 
   try {
-    const response = await fetch('/auth/signup', {
+    const response = await fetch(`${API_BASE_URL}/auth/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
