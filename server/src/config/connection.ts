@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/config/connection.ts
+
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';

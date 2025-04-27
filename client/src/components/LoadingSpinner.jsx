@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/components/LoadingSpinner.jsx
+
 import React from 'react';
 import spinnerStyles from '../assets/css/LoadingSpinner.module.css';
 

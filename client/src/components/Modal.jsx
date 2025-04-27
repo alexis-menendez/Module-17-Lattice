@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/components/Modal.jsx
+
 import React from 'react';
 import modalStyles from '../assets/css/Modal.module.css';
 

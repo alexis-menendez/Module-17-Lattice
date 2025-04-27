@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/interfaces/UserLogin.jsx
+
 /**
  * @typedef {Object} UserLogin
  * @property {string|null} username - The user's username

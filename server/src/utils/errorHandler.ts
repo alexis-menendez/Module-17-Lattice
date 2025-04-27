@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/utils/errorHandler.ts
+
 import { Request, Response, NextFunction } from 'express';
 
 export const errorHandler = (

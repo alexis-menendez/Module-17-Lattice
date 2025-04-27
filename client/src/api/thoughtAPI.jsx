@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/api/thoughtAPI.jsx
+
 import Auth from '../utils/auth'; // Assuming you have an Auth utility that gets the token
 
 const retrieveThoughts = async () => {

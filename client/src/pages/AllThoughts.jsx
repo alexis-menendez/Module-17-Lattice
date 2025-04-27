@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/pages/AllThoughts.jsx
+
 import React, { useEffect, useState } from 'react';
 import ThoughtCard from '../components/ThoughtCard';
 import LoadingSpinner from '../components/LoadingSpinner';

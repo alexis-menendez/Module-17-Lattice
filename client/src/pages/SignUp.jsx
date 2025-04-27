@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/pages/SignUp.jsx
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';

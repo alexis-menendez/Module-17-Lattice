@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/pages/EditThought.jsx
+
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import FormTextarea from '../components/FormTextarea';

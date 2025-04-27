@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/models/User.ts
+
 import { Schema, model, Document, Types, Model } from 'mongoose';
 
 // Plain user fields

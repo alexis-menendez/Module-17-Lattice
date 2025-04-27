@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/utils/formatDate.ts
+
 export const formatDate = (timestamp: Date): string => {
     return timestamp.toLocaleString('en-US', {
       month: 'short',

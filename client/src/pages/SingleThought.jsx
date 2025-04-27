@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/pages/SingleThought.jsx
+
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';

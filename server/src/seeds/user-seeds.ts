@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/seeds/user-seeds.ts
+
 export const users = [
   {
     username: "WhimsyWoods",

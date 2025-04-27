@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/pages/CreateThought.jsx
+
 import React, { useState } from 'react';
 import FormInput from '../components/FormInput';
 import FormTextarea from '../components/FormTextarea';

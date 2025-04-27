@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/utils/auth.js
+
 import { jwtDecode } from 'jwt-decode';
 
 class AuthService {

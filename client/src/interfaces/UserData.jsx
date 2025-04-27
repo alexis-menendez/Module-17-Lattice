@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/interfaces/UserData.jsx
+
 /**
  * @typedef {Object} UserData
  * @property {number|null} id - The user's ID

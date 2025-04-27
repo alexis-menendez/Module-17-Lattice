@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/interfaces/ThoughtData.jsx
+
 /**
  * @typedef {Object} ThoughtData
  * @property {string|null} id - The thought ID

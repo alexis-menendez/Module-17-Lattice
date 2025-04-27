@@ -1,4 +1,4 @@
-// client/src/main.jsx
+// Module-17-Lattice/client/src/main.jsx
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';

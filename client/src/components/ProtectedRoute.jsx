@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/components/ProtectedRoute.jsx
+
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import Auth from '../utils/auth'; // Your auth utility

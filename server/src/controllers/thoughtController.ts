@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/controllers/thoughtController.ts
+
 import { Thought, User } from '../models/index.js';
 import { Request, Response } from 'express';
 import reactionThought from '../models/Thought.js';

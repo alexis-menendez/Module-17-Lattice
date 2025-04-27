@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/components/UserCard.jsx
+
 import React from 'react';
 import cardStyles from '../assets/css/Card.module.css';
 import { Link } from 'react-router-dom';

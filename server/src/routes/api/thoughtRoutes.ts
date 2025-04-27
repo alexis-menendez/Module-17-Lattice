@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/routes/api/thoughtRoutes.ts
+
 import { Router } from 'express';
 import { getThoughts, getSingleThought, createThought, updateThought, deleteThought, addReaction, removeReaction, } from '../../controllers/thoughtController.js';
 

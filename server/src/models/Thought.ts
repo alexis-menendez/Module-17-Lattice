@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/models/Thought.ts
+
 import { Schema, model, Types, Document } from 'mongoose';
 
 interface IReaction {

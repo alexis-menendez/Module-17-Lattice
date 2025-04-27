@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/seeds/thought-seeds.ts
+
 export const thoughts = [
   {
     thoughtText: "Just spotted a rare Blue Pinkgill while hiking today!",
