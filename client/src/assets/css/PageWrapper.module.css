@@ -1,0 +1,13 @@
+/* PageWrapper.module.css */
+
+.pageWrapper {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    min-height: calc(100vh - 80px); 
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
