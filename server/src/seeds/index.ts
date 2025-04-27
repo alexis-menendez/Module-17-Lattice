@@ -7,8 +7,8 @@ import dotenv from 'dotenv';
 
 import User from '../models/User.js'; 
 import Thought from '../models/Thought.js';     
-import { users } from './user-seeds';          
-import { thoughts } from './thought-seeds';    
+import { users } from './user-seeds.js';          
+import { thoughts } from './thought-seeds.js';    
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
