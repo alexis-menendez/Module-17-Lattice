@@ -35,9 +35,13 @@
     "client:clean-rebuild": "cd client && npx rimraf node_modules dist package-lock.json && npm install && npm run build",
     "dev:full-clean-rebuild": "npm run root:clean-rebuild && cd server && npm run clean-rebuild && cd ../client && npm run clean-rebuild && cd .. && npm run start:dev",
 
-    "render-build": "npm run install-all",
-    "render-pre-start": "npm run build",
-    "render-start": "npm run start"
+    "paid:render-build": "npm run install:all",
+    "paid:render-pre-start": "npm run build",
+    "paid:render-start": "npm run start",
+
+    "free:render-build": "npm run install:all && npm run build",
+    "free:render-start": "npm run start"
+
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
