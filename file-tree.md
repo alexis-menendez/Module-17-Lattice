@@ -133,6 +133,8 @@ Module-17-Lattice/
 │   │    |    └── connection.ts  
 │   │    |   
 │   │    ├── controllers/  
+│   │    |    ├── authController.ts   
+│   │    |    | 
 │   │    |    ├── thoughtController.ts   
 │   │    |    |   
 │   │    |    └── userController.ts  
