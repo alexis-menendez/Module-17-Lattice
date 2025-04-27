@@ -1,9 +1,10 @@
 import React from 'react';
+import spinnerStyles from '../assets/css/Spinner.module.css';
 
 const LoadingSpinner = () => {
   return (
-    <div className="p-2">
-      <p>LoadingSpinner component</p>
+    <div className={spinnerStyles.spinnerContainer}>
+      <div className={spinnerStyles.spinner}></div>
     </div>
   );
 };
