@@ -5,10 +5,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "install": "npm install",
-    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
-    "install:server": "cd server && npm install",
-    "install:client": "cd client && npm install",
+    "install:all": "npm run install:root && npm run install:server && npm run install:client",
+    "install:root": "npm install",
+    "install:server": "cd server && npm run install",
+    "install:client": "cd client && npm run install",
     
     "build": "npm run server:build && npm run client:build",
     "build:server": "cd server && npm run build",
@@ -29,7 +29,7 @@
     "server:dev:test": "cd server && npm run dev:test",
     "client:dev:test": "cd client && npm run dev:test",
     
-    "clean": "rimraf node_modules server/node_modules client/node_modules server/dist client/dist server/tsconfig.tsbuildinfo package-lock.json server/package-lock.json client/package-lock.json",
+    "clean": "npx rimraf node_modules server/node_modules client/node_modules server/dist client/dist server/tsconfig.tsbuildinfo package-lock.json server/package-lock.json client/package-lock.json",
 
     "render-build": "npm run install-all",
     "render-pre-start": "npm run build",

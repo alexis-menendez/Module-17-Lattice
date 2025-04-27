@@ -5,12 +5,13 @@
     "description": "Lattice Client - Frontend for Social Network",
     "type": "module",
     "scripts": {
-        "dev": "vite",
         "build": "vite build",
+        "dev": "vite",
+        "start": "vite preview",
         "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-        "preview": "vite preview",
         "test": "vitest run",
-        "dev:test": "vite --open"
+        "dev:test": "vite --open",
+        "clean": "npx rimraf node_modules dist package-lock.json"
     },
     "dependencies": {
         "jwt-decode": "^4.0.0",

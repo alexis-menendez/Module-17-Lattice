@@ -6,10 +6,11 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/server.js",
     "dev": "npm run build && nodemon dist/server.js",
+    "start": "node dist/server.js",
     "seed": "node dist/seeds/index.js",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles",
+    "clean": "npx rimraf node_modules dist tsconfig.tsbuildinfo package-lock.json"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
