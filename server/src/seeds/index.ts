@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/seeds/index.ts
+
 import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
