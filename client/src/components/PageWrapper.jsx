@@ -1,9 +1,9 @@
 import React from 'react';
 
-const PageWrapper = () => {
+const PageWrapper = ({ children }) => {
   return (
-    <div className="p-2">
-      <p>PageWrapper component</p>
+    <div className="container p-4 mx-auto">
+      {children}
     </div>
   );
 };
