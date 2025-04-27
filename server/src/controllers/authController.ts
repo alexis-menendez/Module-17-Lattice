@@ -1,4 +1,4 @@
-// server/src/controllers/authController.ts
+// Module-17-Lattice/server/src/controllers/authController.ts
 
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
@@ -10,37 +10,33 @@ export const signup = async (req: Request, res: Response) => {
   try {
     const { username, email, password } = req.body;
 
+    // Basic validation
     if (!username || !email || !password) {
-      return res.status(400).json({ message: 'Please provide username, email, and password.' });
+      return res.status(400).json({ message: 'All fields are required.' });
     }
 
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    // Check if user already exists
+    const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.status(409).json({ message: 'Username or email already exists.' });
+      return res.status(400).json({ message: 'Username already taken.' });
     }
 
+    // Create new user
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const newUser = await User.create({
       username,
       email,
       password: hashedPassword,
     });
 
+    // Sign token
     const token = signToken({ id: newUser._id, username: newUser.username });
 
-    return res.status(201).json({
-      message: 'User created successfully.',
-      token,
-      user: {
-        id: newUser._id,
-        username: newUser.username,
-        email: newUser.email,
-      },
-    });
-  } catch (error) {
-    console.error('Signup error:', error);
-    return res.status(500).json({ message: 'Server error during signup.' });
+    // Respond with token in JSON
+    return res.status(200).json({ token });
+  } catch (err) {
+    console.error('Signup error:', err);
+    return res.status(500).json({ message: 'Internal server error.' });
   }
 };
 
@@ -49,33 +45,30 @@ export const login = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
 
+    // Basic validation
     if (!username || !password) {
-      return res.status(400).json({ message: 'Please provide username and password.' });
+      return res.status(400).json({ message: 'Username and password are required.' });
     }
 
+    // Find user
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(404).json({ message: 'Invalid username or password.' });
+      return res.status(400).json({ message: 'Invalid credentials.' });
     }
 
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) {
-      return res.status(401).json({ message: 'Invalid username or password.' });
+    // Compare passwords
+    const isValid = await bcrypt.compare(password, user.password);
+    if (!isValid) {
+      return res.status(400).json({ message: 'Invalid credentials.' });
     }
 
+    // Sign token
     const token = signToken({ id: user._id, username: user.username });
 
-    return res.status(200).json({
-      message: 'Login successful.',
-      token,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-      },
-    });
-  } catch (error) {
-    console.error('Login error:', error);
-    return res.status(500).json({ message: 'Server error during login.' });
+    // Respond with token in JSON
+    return res.status(200).json({ token });
+  } catch (err) {
+    console.error('Login error:', err);
+    return res.status(500).json({ message: 'Internal server error.' });
   }
 };
