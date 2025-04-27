@@ -7,10 +7,10 @@
   "scripts": {
     "install:all": "npm run install:root && npm run install:server && npm run install:client",
     "install:root": "npm install",
-    "install:server": "cd server && npm run install",
-    "install:client": "cd client && npm run install",
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
     
-    "build": "npm run server:build && npm run client:build",
+    "build": "npm run build:server && npm run build:client",
     "build:server": "cd server && npm run build",
     "build:client": "cd client && npm run build",
     
