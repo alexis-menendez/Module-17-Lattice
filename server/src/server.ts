@@ -3,10 +3,10 @@ dotenv.config();
 
 import express from 'express';
 //import mongoose from 'mongoose';
-import db from './config/connection';
+import db from './config/connection.js';
 import path from "node:path";
 import { fileURLToPath } from "url";
-import routes from './routes/index';
+import routes from './routes/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
