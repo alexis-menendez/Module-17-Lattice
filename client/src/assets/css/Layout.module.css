@@ -1,0 +1,40 @@
+/* Layout.module.css */
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  .centeredContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 70vh;
+  }
+  
+  .pageSection {
+    margin: 4rem 0;
+  }
+  
+  .flexRow {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+  
+  .flexColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .responsiveGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  
