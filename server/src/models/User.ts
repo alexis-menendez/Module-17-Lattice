@@ -1,6 +1,7 @@
-import { Schema, model, Document, Types } from 'mongoose';
+import { Schema, model, Document, Types, Model } from 'mongoose';
 
-export interface IUser extends Document {
+// Plain user fields
+export interface IUser {
   username: string;
   email: string;
   password: string;
@@ -8,7 +9,10 @@ export interface IUser extends Document {
   friends: Types.ObjectId[];
 }
 
-const userSchema = new Schema<IUser>(
+// Mongoose document with full methods
+export interface UserDocument extends IUser, Document {}
+
+const userSchema = new Schema<UserDocument>(
   {
     username: {
       type: String,
@@ -43,11 +47,12 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-// Virtual for friend count
-userSchema.virtual('friendCount').get(function (this: IUser) {
+// Virtuals must use UserDocument
+userSchema.virtual('friendCount').get(function (this: UserDocument) {
   return this.friends.length;
 });
 
-const User = model<IUser>('User', userSchema);
+// Model should be based on UserDocument
+const User = model<UserDocument, Model<UserDocument>>('User', userSchema);
 
 export default User;

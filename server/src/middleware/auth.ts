@@ -26,12 +26,11 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
     return res.status(500).json({ message: 'Server misconfiguration: missing JWT secret' });
   }
 
-  jwt.verify(token, secretKey, (err, decoded) => {
-    if (err || !decoded) {
-      return res.status(403).json({ message: 'Invalid or expired token' });
-    }
-
-    req.user = decoded as CustomJwtPayload;
-    return next();
-  });
+  try {
+    const decoded = jwt.verify(token, secretKey) as CustomJwtPayload;
+    req.user = decoded;
+    return next();  
+  } catch (err) {
+    return res.status(403).json({ message: 'Invalid or expired token' });
+  }
 };

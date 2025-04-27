@@ -3,10 +3,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 
-import User from '../models/User.js';
-import Thought from '../models/Thought.js';
-import userSeeds from './userSeeds.js';
-import thoughtSeeds from './thoughtSeeds.js';
+import User from '../models/User';      
+import Thought from '../models/User'; 
+import { users } from './user-seeds';          
+import { thoughts } from './thought-seeds';    
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,10 +25,10 @@ const seedAll = async () => {
     console.log('Existing data cleared.');
 
     // Insert seed data
-    await User.insertMany(userSeeds);
+    await User.insertMany(users);
     console.log('Users seeded.');
 
-    await Thought.insertMany(thoughtSeeds);
+    await Thought.insertMany(thoughts);
     console.log('Thoughts seeded.');
 
     console.log('Database seeding complete!');

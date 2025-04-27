@@ -1,6 +1,23 @@
-import { User } from '../models/User.js';
-import users from './users.json' assert { type: 'json' };
-
-export const seedUsers = async () => {
-  await User.insertMany(users);
-};
+export const users = [
+  {
+    username: "WhimsyWoods",
+    email: "alexis.246.menendez@gmail.com",
+    password: "test123",
+    thoughts: [],
+    friends: [],
+  },
+  {
+    username: "MycoMama",
+    email: "mycomama@latticefungi.com",
+    password: "test123",
+    thoughts: [],
+    friends: [],
+  },
+  {
+    username: "SporeLore",
+    email: "sporelore@latticefungi.com",
+    password: "test123",
+    thoughts: [],
+    friends: [],
+  },
+];
