@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-const forceDatabaseRefresh = false;
-
 import express from 'express';
 //import mongoose from 'mongoose';
 import db from './config/connection';
