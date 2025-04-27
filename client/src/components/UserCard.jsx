@@ -1,9 +1,39 @@
 import React from 'react';
+import cardStyles from '../assets/css/Card.module.css';
+import { Link } from 'react-router-dom';
 
-const UserCard = () => {
+const UserCard = ({ user }) => {
+  if (!user) return null;
+
   return (
-    <div className="p-2">
-      <p>UserCard component</p>
+    <div className={cardStyles.card}>
+      <div className="flex flex-col items-center text-center">
+        <div className="mb-4">
+          {/* Optional profile icon */}
+          <div className="flex items-center justify-center w-16 h-16 mx-auto text-2xl font-bold text-indigo-600 bg-indigo-100 rounded-full">
+            {user.username.charAt(0).toUpperCase()}
+          </div>
+        </div>
+
+        <h2 className="mb-1 text-xl font-bold">{user.username}</h2>
+
+        {user.email && (
+          <p className="mb-2 text-sm text-gray-500">{user.email}</p>
+        )}
+
+        {typeof user.friendCount !== 'undefined' && (
+          <p className="mb-4 text-sm text-gray-600">
+            {user.friendCount} {user.friendCount === 1 ? "Friend" : "Friends"}
+          </p>
+        )}
+
+        <Link 
+          to={`/profile/${user._id}`} 
+          className="text-sm font-semibold text-indigo-600 hover:underline"
+        >
+          View Profile
+        </Link>
+      </div>
     </div>
   );
 };
