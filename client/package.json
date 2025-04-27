@@ -11,7 +11,8 @@
         "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
         "test": "vitest run",
         "dev:test": "vite --open",
-        "clean": "npx rimraf node_modules dist package-lock.json"
+        "clean": "npx rimraf node_modules dist package-lock.json",
+        "clean-rebuild": "npx rimraf node_modules dist package-lock.json && npm install && npm run build"
     },
     "dependencies": {
         "jwt-decode": "^4.0.0",

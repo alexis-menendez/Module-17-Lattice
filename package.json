@@ -30,6 +30,10 @@
     "client:dev:test": "cd client && npm run dev:test",
     
     "clean": "npx rimraf node_modules server/node_modules client/node_modules server/dist client/dist server/tsconfig.tsbuildinfo package-lock.json server/package-lock.json client/package-lock.json",
+    "root:clean-rebuild": "npx rimraf node_modules package-lock.json && npm install",
+    "server:clean-rebuild": "cd server && npx rimraf node_modules dist tsconfig.tsbuildinfo package-lock.json && npm install && npm run build",
+    "client:clean-rebuild": "cd client && npx rimraf node_modules dist package-lock.json && npm install && npm run build",
+    "dev:full-clean-rebuild": "npm run root:clean-rebuild && cd server && npm run clean-rebuild && cd ../client && npm run clean-rebuild && cd .. && npm run start:dev",
 
     "render-build": "npm run install-all",
     "render-pre-start": "npm run build",
