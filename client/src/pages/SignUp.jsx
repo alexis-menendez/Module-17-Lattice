@@ -10,7 +10,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    age: '',
+    dateOfBirth: '',
     username: '',
     email: '',
     password: '',
@@ -24,14 +24,27 @@ const SignUp = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const calculateAge = (dob) => {
+    const birthDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setIsSubmitting(true);
 
-    const { age, username, email, password } = formData;
+    const { dateOfBirth, username, email, password } = formData;
+    const age = calculateAge(dateOfBirth);
 
-    if (parseInt(age, 10) < 18) {
+    if (age < 18) {
       setError('You must be at least 18 years old to register.');
       setIsSubmitting(false);
       return;
@@ -60,14 +73,13 @@ const SignUp = () => {
 
       <form onSubmit={handleSubmit} className="flex flex-col max-w-md gap-6 mx-auto">
         <FormInput
-          label="Age"
-          name="age"
-          type="number"
-          value={formData.age}
+          label="Date of Birth"
+          name="dateOfBirth"
+          type="date"
+          value={formData.dateOfBirth}
           onChange={handleChange}
-          placeholder="Enter your age"
           required
-          error={error && formData.age && parseInt(formData.age, 10) < 18 ? error : ''}
+          error={error && formData.dateOfBirth && calculateAge(formData.dateOfBirth) < 18 ? error : ''}
         />
 
         <FormInput
@@ -77,7 +89,6 @@ const SignUp = () => {
           onChange={handleChange}
           placeholder="Choose a username"
           required
-          error={error && !formData.username ? error : ''}
         />
 
         <FormInput
@@ -88,7 +99,6 @@ const SignUp = () => {
           onChange={handleChange}
           placeholder="Enter your email address"
           required
-          error={error && !formData.email ? error : ''}
         />
 
         <FormInput
@@ -99,7 +109,6 @@ const SignUp = () => {
           onChange={handleChange}
           placeholder="Create a password"
           required
-          error={error && !formData.password ? error : ''}
         />
 
         <FormButton isLoading={isSubmitting}>
