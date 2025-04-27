@@ -51,11 +51,20 @@ const SignUp = () => {
     }
 
     try {
+      // ✅ Only send username, email, password
+      const signupData = { username, email, password };
+
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Fake token to simulate signup/login (replace with real backend response later)
-      Auth.login('faketoken123');
+      // Example of real API call (future)
+      // await fetch('/api/signup', {
+      //   method: 'POST',
+      //   body: JSON.stringify(signupData),
+      //   headers: { 'Content-Type': 'application/json' }
+      // });
+
+      Auth.login('faketoken123'); // Simulated login for now
 
       // On success, redirect to Dashboard
       navigate('/dashboard');
@@ -76,6 +85,7 @@ const SignUp = () => {
           label="Date of Birth"
           name="dateOfBirth"
           type="date"
+          max={new Date().toISOString().split('T')[0]} // prevent future dates
           value={formData.dateOfBirth}
           onChange={handleChange}
           required
