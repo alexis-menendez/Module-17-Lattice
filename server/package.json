@@ -7,17 +7,9 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "nodemon src/server.ts",
+    "dev": "npm run build && nodemon dist/server.js",
     "seed": "node dist/seeds/index.js",
-    "test": "jest --detectOpenHandles",
-    "dev:test": "npx nodemon src/server.ts"
-  },
-  "nodemonConfig": {
-    "watch": [
-      "src"
-    ],
-    "ext": "ts,json,js",
-    "exec": "npx tsc && node dist/server.js"
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
