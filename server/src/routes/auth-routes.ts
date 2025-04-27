@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/routes/auth-routes.ts
+
 import { Router, Request, Response } from 'express';
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';

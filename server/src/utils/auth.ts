@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/utils/auth.ts
+
 import jwt from 'jsonwebtoken';
 
 const secret = process.env.JWT_SECRET || 'defaultsecret';

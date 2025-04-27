@@ -4,7 +4,8 @@ import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import ErrorMessage from '../components/ErrorMessage';
 import layoutStyles from '../assets/css/Layout.module.css';
-import Auth from '../utils/auth'; // Your auth utility
+import { login } from '../api/authAPI';
+import Auth from '../utils/auth'; // token handler
 
 const Login = () => {
   const navigate = useNavigate();
@@ -27,17 +28,12 @@ const Login = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate login API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Fake token to simulate login (replace with real backend response later)
-      Auth.login('faketoken123');
-
-      // On success, redirect to Dashboard
+      const data = await login(formData);
+      Auth.login(data.token); // ✅ Save real JWT token
       navigate('/dashboard');
     } catch (err) {
       console.error(err);
-      setError('Invalid username or password.');
+      setError(err);
     } finally {
       setIsSubmitting(false);
     }
@@ -55,7 +51,6 @@ const Login = () => {
           onChange={handleChange}
           placeholder="Enter your username"
           required
-          error={error}
         />
 
         <FormInput
@@ -66,7 +61,6 @@ const Login = () => {
           onChange={handleChange}
           placeholder="Enter your password"
           required
-          error={error}
         />
 
         <FormButton isLoading={isSubmitting}>

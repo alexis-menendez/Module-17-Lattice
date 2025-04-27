@@ -4,7 +4,8 @@ import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import ErrorMessage from '../components/ErrorMessage';
 import layoutStyles from '../assets/css/Layout.module.css';
-import Auth from '../utils/auth'; // Your auth utility
+import { signup } from '../api/authAPI';
+import Auth from '../utils/auth';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -51,26 +52,13 @@ const SignUp = () => {
     }
 
     try {
-      // ✅ Only send username, email, password
       const signupData = { username, email, password };
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Example of real API call (future)
-      // await fetch('/api/signup', {
-      //   method: 'POST',
-      //   body: JSON.stringify(signupData),
-      //   headers: { 'Content-Type': 'application/json' }
-      // });
-
-      Auth.login('faketoken123'); // Simulated login for now
-
-      // On success, redirect to Dashboard
+      const data = await signup(signupData);
+      Auth.login(data.token); // ✅ Save real JWT token
       navigate('/dashboard');
     } catch (err) {
       console.error(err);
-      setError('Signup failed. Please try again.');
+      setError(err);
     } finally {
       setIsSubmitting(false);
     }

@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/middleware/auth.ts
+
 import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload as DefaultJwtPayload } from 'jsonwebtoken';
 
