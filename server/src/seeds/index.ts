@@ -3,8 +3,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 
-import User from '../models/User';      
-import Thought from '../models/User'; 
+import User from '../models/User.js'; 
+import Thought from '../models/Thought.js';     
 import { users } from './user-seeds';          
 import { thoughts } from './thought-seeds';    
 
