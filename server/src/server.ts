@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
+import cors from 'cors'; 
 //import mongoose from 'mongoose';
 import db from './config/connection.js';
 import path from "node:path";
@@ -15,6 +16,9 @@ const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+// CORS middleware
+app.use(cors());
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
