@@ -4,20 +4,104 @@ export const users = [
     email: "alexis.246.menendez@gmail.com",
     password: "test123",
     thoughts: [],
-    friends: [],
+    friends: []
   },
   {
     username: "MycoMama",
     email: "mycomama@latticefungi.com",
     password: "test123",
     thoughts: [],
-    friends: [],
+    friends: []
   },
   {
     username: "SporeLore",
     email: "sporelore@latticefungi.com",
     password: "test123",
     thoughts: [],
-    friends: [],
+    friends: []
   },
+  {
+    username: "CapCollector",
+    email: "capcollector@latticefungi.com",
+    password: "test123",
+    thoughts: [],
+    friends: []
+  },
+  {
+    username: "SporeSprite",
+    email: "sporesprite@latticefungi.com",
+    password: "test123",
+    thoughts: [],
+    friends: []
+  },
+  {
+    username: "MycoMuse",
+    email: "mycomuse@latticefungi.com",
+    password: "test123",
+    thoughts: [],
+    friends: []
+  },
+  {
+    username: "MossyMinds",
+    email: "mossyminds@latticefungi.com",
+    password: "test123",
+    thoughts: [],
+    friends: []
+  },
+  {
+    username: "GillsAndThrills",
+    email: "gillsandthrills@latticefungi.com",
+    password: "test123",
+    thoughts: [],
+    friends: []
+  },
+  {
+    username: "FungalFriend",
+    email: "fungalfriend@latticefungi.com",
+    password: "test123",
+    thoughts: [],
+    friends: []
+  },
+  {
+    username: "ShroomBloom",
+    email: "shroombloom@latticefungi.com",
+    password: "test123",
+    thoughts: [],
+    friends: []
+  },
+  {
+    username: "LichenLover",
+    email: "lichenlover@latticefungi.com",
+    password: "test123",
+    thoughts: [],
+    friends: []
+  },
+  {
+      username: "ForagerFox",
+      email: "foragerfox@latticefungi.com",
+      password: "test123",
+      thoughts: [],
+      friends: []
+    },
+    {
+      username: "HiddenHyphae",
+      email: "hiddenhyphae@latticefungi.com",
+      password: "test123",
+      thoughts: [],
+      friends: []
+    },
+    {
+      username: "TruffleTroubadour",
+      email: "truffletroubadour@latticefungi.com",
+      password: "test123",
+      thoughts: [],
+      friends: []
+    },
+    {
+      username: "PuffballPal",
+      email: "puffballpal@latticefungi.com",
+      password: "test123",
+      thoughts: [],
+      friends: []
+    }
 ];

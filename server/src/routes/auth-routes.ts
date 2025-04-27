@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import User, { UserDocument } from '../models/User';
+import User from '../models/User';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
@@ -7,7 +7,7 @@ export const login = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
 
-    const user = await User.findOne({ username }) as UserDocument | null; 
+    const user = await User.findOne({ username });
 
     if (!user) {
       return res.status(401).json({ message: 'Authentication failed: user not found' });
@@ -25,7 +25,7 @@ export const login = async (req: Request, res: Response) => {
     }
 
     const token = jwt.sign(
-      { _id: user._id.toString(), username: user.username },
+      { _id: String(user._id), username: user.username },
       secretKey,
       { expiresIn: '1h' }
     );
