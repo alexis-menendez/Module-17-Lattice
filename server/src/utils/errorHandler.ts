@@ -2,9 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 
 export const errorHandler = (
   err: any,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ): void => {
   console.error('Error:', err);
 
@@ -13,3 +13,4 @@ export const errorHandler = (
 
   res.status(statusCode).json({ error: message });
 };
+
