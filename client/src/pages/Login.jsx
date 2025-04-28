@@ -31,7 +31,7 @@ const Login = () => {
 
     try {
       const data = await login(formData);
-      Auth.login(data.token); // ✅ Save real JWT token
+      Auth.login(data.token); 
       navigate('/dashboard');
     } catch (err) {
       console.error(err);

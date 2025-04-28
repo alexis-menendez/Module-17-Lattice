@@ -56,7 +56,7 @@ const SignUp = () => {
     try {
       const signupData = { username, email, password };
       const data = await signup(signupData);
-      Auth.login(data.token); // ✅ Save real JWT token
+      Auth.login(data.token); 
       navigate('/dashboard');
     } catch (err) {
       console.error(err);
