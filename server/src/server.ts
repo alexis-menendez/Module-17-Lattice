@@ -1,14 +1,15 @@
 // Module-17-Lattice/server/src/server.ts
 
-import dotenv from 'dotenv';
-dotenv.config();
+import dotenv from 'dotenv'; 
+dotenv.config(); 
 
+import path from "node:path"; 
+import { fileURLToPath } from 'url'; 
+ 
 import express from 'express';
 import cors from 'cors'; 
 //import mongoose from 'mongoose';
 import db from './config/connection.js';
-import path from "node:path";
-import { fileURLToPath } from "url";
 import routes from './routes/index.js';
 
 const __filename = fileURLToPath(import.meta.url);

@@ -32,6 +32,6 @@
     "noImplicitOverride": true,
     "useUnknownInCatchVariables": true
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts"], 
   "typeRoots": ["./node_modules/@types", "./src/types"]
 }
