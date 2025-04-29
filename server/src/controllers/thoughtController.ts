@@ -35,7 +35,7 @@ export const createThought = async (req: Request, res: Response) => {
 
     const thought = await Thought.create({
       thoughtText,
-      username: req.body.username,  // frontend must send username!
+      username: req.body.username,  // frontend must send username
       visibility: visibility || 'public',
     });
 
@@ -56,33 +56,47 @@ export const createThought = async (req: Request, res: Response) => {
   }
 };
 
-// Update a thought
+// Update a thought (now with ownership check)
 export const updateThought = async (req: Request, res: Response) => {
   try {
-    const thought = await Thought.findByIdAndUpdate(
+    const thought = await Thought.findById(req.params.thoughtId);
+
+    if (!thought) {
+      return res.status(404).json({ message: 'No thought with this ID!' });
+    }
+
+    // Ownership check
+    if (thought.username !== req.user?.username) {
+      return res.status(403).json({ message: 'You are not authorized to edit this thought.' });
+    }
+
+    const updatedThought = await Thought.findByIdAndUpdate(
       req.params.thoughtId,
       { $set: req.body },
       { runValidators: true, new: true }
     );
 
-    if (!thought) {
-      return res.status(404).json({ message: 'No thought with this ID!' });
-    }
-
-    return res.json(thought);
+    return res.json(updatedThought);
   } catch (err) {
     return res.status(500).json(err);
   }
 };
 
-// Delete a thought
+// Delete a thought (now with ownership check)
 export const deleteThought = async (req: Request, res: Response) => {
   try {
-    const thought = await Thought.findByIdAndDelete(req.params.thoughtId);
+    const thought = await Thought.findById(req.params.thoughtId);
 
     if (!thought) {
       return res.status(404).json({ message: 'No thought with this ID!' });
     }
+
+    // Ownership check
+    if (thought.username !== req.user?.username) {
+      return res.status(403).json({ message: 'You are not authorized to delete this thought.' });
+    }
+
+    await Thought.findByIdAndDelete(req.params.thoughtId);
 
     await User.updateMany(
       { thoughts: req.params.thoughtId },
