@@ -66,7 +66,7 @@ export const updateThought = async (req: Request, res: Response) => {
     }
 
     // Ownership check
-    if (thought.username !== req.user?.username) {
+    if (thought.username !== req.user!.username) {
       return res.status(403).json({ message: 'You are not authorized to edit this thought.' });
     }
 
@@ -92,7 +92,7 @@ export const deleteThought = async (req: Request, res: Response) => {
     }
 
     // Ownership check
-    if (thought.username !== req.user?.username) {
+    if (thought.username !== req.user!.username) {
       return res.status(403).json({ message: 'You are not authorized to delete this thought.' });
     }
 
@@ -152,7 +152,7 @@ export const removeReaction = async (req: Request, res: Response) => {
 // Get thoughts posted by the logged-in user
 export const getMyThoughts = async (req: Request, res: Response) => {
   try {
-    const thoughts = await Thought.find({ username: req.user.username });
+    const thoughts = await Thought.find({ username: req.user!.username });
     return res.json(thoughts);
   } catch (err) {
     return res.status(500).json(err);
@@ -162,13 +162,13 @@ export const getMyThoughts = async (req: Request, res: Response) => {
 // Get thoughts posted by the logged-in user's friends
 export const getFriendsThoughts = async (req: Request, res: Response) => {
   try {
-    const user = await User.findById(req.user.id).populate('friends');
+    const user = await User.findById(req.user!.id).populate('friends');
 
     if (!user) {
       return res.status(404).json({ message: 'No user found.' });
     }
 
-    const friendsUsernames = user.friends.map(friend => friend.username);
+    const friendsUsernames = (user.friends as { username: string }[]).map(friend => friend.username);
 
     const thoughts = await Thought.find({ 
       username: { $in: friendsUsernames }
@@ -183,13 +183,13 @@ export const getFriendsThoughts = async (req: Request, res: Response) => {
 // Get public thoughts from users the current user follows
 export const getFollowingThoughts = async (req: Request, res: Response) => {
   try {
-    const user = await User.findById(req.user.id).populate('following');
+    const user = await User.findById(req.user!.id).populate('following');
 
     if (!user) {
       return res.status(404).json({ message: 'No user found.' });
     }
 
-    const followingUsernames = user.following.map(follow => follow.username);
+    const followingUsernames = (user.following as { username: string }[]).map(follow => follow.username);
 
     const thoughts = await Thought.find({ 
       username: { $in: followingUsernames },
