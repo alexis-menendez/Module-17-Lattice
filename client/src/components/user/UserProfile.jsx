@@ -5,8 +5,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../common/LoadingSpinner';
 import layoutStyles from '../../assets/css/layout/Layout.module.css';
 import Auth from '../../utils/auth';
-import { fetchUserProfileById, fetchMyProfile } from '../../api/userAPI';
-
+import { retrieveUsers, fetchMyProfile } from '../../api/userAPI'; // ✅ Correct imports
 
 const UserProfile = () => {
   const { userId } = useParams();
@@ -28,15 +27,21 @@ const UserProfile = () => {
             navigate('/login');
             return;
           }
-          profileData = await fetchMyProfile(); // Logged-in user's own data
+          profileData = await fetchMyProfile();
         } else {
-          profileData = await fetchUserProfileById(userId); // Another user's public profile
+          // No separate fetchUserProfileById yet — simulate by retrieving all users
+          const users = await retrieveUsers();
+          profileData = users.find((u) => u._id === userId);
+
+          if (!profileData) {
+            throw new Error('User not found');
+          }
         }
 
         setUser({
           id: profileData._id,
           username: profileData.username,
-          email: profileData.email || null, // Only available if you fetch your own profile
+          email: profileData.email || null,
           bio: profileData.bio || '',
           profilePhoto: profileData.profilePhoto || '',
           friendCount: profileData.friends?.length || 0
@@ -61,8 +66,8 @@ const UserProfile = () => {
       <div className={layoutStyles.centeredContent}>
         <h2 className="mb-4 text-2xl font-bold text-red-600">Error</h2>
         <p className="text-gray-500">{error}</p>
-        <Link 
-          to="/dashboard" 
+        <Link
+          to="/dashboard"
           className="inline-block px-6 py-2 mt-6 font-semibold text-white transition bg-indigo-600 rounded hover:bg-indigo-700"
         >
           Back to Dashboard
@@ -79,7 +84,7 @@ const UserProfile = () => {
     <div className={layoutStyles.container}>
       <div className="mb-12 text-center">
         {user.profilePhoto && (
-          <img 
+          <img
             src={user.profilePhoto}
             alt="Profile"
             className="w-32 h-32 mx-auto mb-4 rounded-full shadow-md"
@@ -87,7 +92,6 @@ const UserProfile = () => {
         )}
         <h1 className="mb-2 text-4xl font-bold">{user.username}</h1>
 
-        {/* Only show email if user is viewing their own profile */}
         {userId === 'me' && user.email && (
           <p className="mb-2 text-sm text-gray-400">{user.email}</p>
         )}
@@ -102,7 +106,7 @@ const UserProfile = () => {
       </div>
 
       <div className="text-center">
-        <Link 
+        <Link
           to="/dashboard"
           className="inline-block px-6 py-2 mt-6 font-semibold text-white transition bg-indigo-600 rounded hover:bg-indigo-700"
         >
