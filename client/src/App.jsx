@@ -1,28 +1,39 @@
+// Module-17-Lattice/client/src/App.jsx
+
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
+// Layout
+import MainLayout from './components/layout/MainLayout';
+import ProtectedRoute from './components/layout/ProtectedRoute';
+
 // Pages
-import CreateThought from './pages/CreateThought';
-import Dashboard from './pages/Dashboard';
-import EditThought from './pages/EditThought';
-import FriendsList from './pages/FriendsList';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import NotFound from './pages/NotFound';
 import SignUp from './pages/SignUp';
-import SingleThought from './pages/SingleThought';
-import UserProfile from './pages/UserProfile';
-import MyPosts from './components/MyPosts'; 
+import Dashboard from './pages/Dashboard';
+import NotFound from './pages/NotFound';
 
-// Components
-import MainLayout from './components/MainLayout';
-import ProtectedRoute from './components/ProtectedRoute';
+// Thoughts
+import CreateThought from './components/thoughts/CreateThought';
+import EditThought from './components/thoughts/EditThought';
+import SingleThought from './components/thoughts/SingleThought';
+import AllThoughts from './components/thoughts/AllThoughts';
+import FriendFeed from './components/thoughts/FriendFeed';
+import PublicFeed from './components/thoughts/PublicFeed';
+import FollowFeed from './components/thoughts/FollowFeed';
+
+// User
+import FriendsList from './components/user/FriendsList';
+import MyPosts from './components/user/MyPosts';
+import UserProfile from './components/user/UserProfile';
 
 function App() {
   return (
     <Routes>
       {/* Everything wrapped inside MainLayout */}
       <Route element={<MainLayout />}>
+        
         {/* Public Pages */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -37,14 +48,17 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
-          path="/dashboard/posts" // ✅ Add this route
+          path="/dashboard/posts"
           element={
             <ProtectedRoute>
               <MyPosts />
             </ProtectedRoute>
           }
         />
+
+        {/* Thoughts (Protected) */}
         <Route
           path="/thoughts"
           element={
@@ -77,8 +91,32 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        {/* Feeds */}
         <Route
           path="/friends"
+          element={
+            <ProtectedRoute>
+              <FriendFeed />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/public"
+          element={<PublicFeed />}
+        />
+        <Route
+          path="/following"
+          element={
+            <ProtectedRoute>
+              <FollowFeed />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* User */}
+        <Route
+          path="/friends-list"
           element={
             <ProtectedRoute>
               <FriendsList />

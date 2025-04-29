@@ -1,3 +1,5 @@
+// Module-17-Lattice/client/src/components/layout/MainLayout.jsx
+
 import React from 'react';
 import Navbar from './NavBar';
 import { Outlet } from 'react-router-dom';

@@ -1,4 +1,4 @@
-// Module-17-Lattice/client/src/components/ReactionList.jsx
+// Module-17-Lattice/client/src/components/thoughts/ReactionList.jsx
 
 import React from 'react';
 import cardStyles from '../assets/css/Card.module.css'; 

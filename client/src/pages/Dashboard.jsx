@@ -3,7 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import layoutStyles from '../assets/css/Layout.module.css';
-import buttonStyles from '../assets/css/Button.module.css'; // assuming you already have nice button styles
+import buttonStyles from '../assets/css/Button.module.css'; 
 
 const Dashboard = () => {
   return (

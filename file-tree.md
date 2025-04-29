@@ -81,6 +81,8 @@ Module-17-Lattice/
 │   │    |    |    |  
 │   │    |    |    ├── EditThought.jsx  
 │   │    |    |    |  
+│   │    |    |    ├── FollowFeed.jsx  
+│   │    |    |    |  
 │   │    |    |    ├── FriendFeed.jsx  
 │   │    |    |    |  
 │   │    |    |    ├── PublicFeed.jsx  

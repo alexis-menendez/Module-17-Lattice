@@ -1,4 +1,4 @@
-// Module-17-Lattice/client/src/pages/CreateThought.jsx
+// Module-17-Lattice/client/src/components/thoughts/CreateThought.jsx
 
 import React, { useState } from 'react';
 import FormInput from '../components/FormInput';

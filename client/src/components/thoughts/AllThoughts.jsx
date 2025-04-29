@@ -1,4 +1,4 @@
-// Module-17-Lattice/client/src/pages/AllThoughts.jsx
+// Module-17-Lattice/client/src/components/thoughts/AllThoughts.jsx
 
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';

@@ -1,4 +1,4 @@
-// Module-17-Lattice/client/src/pages/EditThought.jsx
+// Module-17-Lattice/client/src/components/thoughts/EditThought.jsx
 
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';

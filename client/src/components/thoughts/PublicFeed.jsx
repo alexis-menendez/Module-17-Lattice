@@ -1,4 +1,4 @@
-// Module-17-Lattice/client/src/components/PublicFeed.jsx
+// Module-17-Lattice/client/src/components/thoughts/PublicFeed.jsx
 
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';

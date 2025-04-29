@@ -1,4 +1,4 @@
-// Module-17-Lattice/client/src/components/NavBar.jsx
+// Module-17-Lattice/client/src/components/navigation/components/NavBar.jsx
 
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';

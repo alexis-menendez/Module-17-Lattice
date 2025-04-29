@@ -1,4 +1,4 @@
-// Module-17-Lattice/client/src/components/FormInput.jsx
+// Module-17-Lattice/client/src/components/form/FormInput.jsx
 
 import React from 'react';
 import formStyles from '../assets/css/Form.module.css';

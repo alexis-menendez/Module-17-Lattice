@@ -1,4 +1,4 @@
-// Module-17-Lattice/client/src/pages/FriendsList.jsx
+// Module-17-Lattice/client/src/components/user/FriendsList.jsx
 
 import React, { useEffect, useState } from 'react';
 import UserCard from '../components/UserCard';

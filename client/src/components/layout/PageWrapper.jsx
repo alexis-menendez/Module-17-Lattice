@@ -1,4 +1,4 @@
-// Module-17-Lattice/client/src/components/PageWrapper.jsx
+// Module-17-Lattice/client/src/components/layout/PageWrapper.jsx
 
 import React from 'react';
 

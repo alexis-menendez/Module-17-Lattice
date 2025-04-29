@@ -1,4 +1,4 @@
-// Module-17-Lattice/client/src/components/ProtectedRoute.jsx
+// Module-17-Lattice/client/src/components/layout/ProtectedRoute.jsx
 
 import React from 'react';
 import { Navigate } from 'react-router-dom';

@@ -1,4 +1,4 @@
-// Module-17-Lattice/client/src/pages/UserProfile.jsx
+// Module-17-Lattice/client/src/components/user/UserProfile.jsx
 
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
