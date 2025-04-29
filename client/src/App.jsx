@@ -2,7 +2,6 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // Pages
-import AllThoughts from './pages/AllThoughts';
 import CreateThought from './pages/CreateThought';
 import Dashboard from './pages/Dashboard';
 import EditThought from './pages/EditThought';
@@ -13,7 +12,7 @@ import NotFound from './pages/NotFound';
 import SignUp from './pages/SignUp';
 import SingleThought from './pages/SingleThought';
 import UserProfile from './pages/UserProfile';
-import MyPosts from './components/MyPosts'; // ✅ Add this line
+import MyPosts from './components/MyPosts'; 
 
 // Components
 import MainLayout from './components/MainLayout';

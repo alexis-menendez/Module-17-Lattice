@@ -27,33 +27,76 @@ Module-17-Lattice/
 │   │    ├── assets/  
 │   │    |    ├── react.svg  
 │   │    |    |  
-│   │    |    └── css/  
-│   │    |         └── css modules...  
+│   │    │    └── css/  
+│   │    │         ├── common/
+│   │    |         |    ├── Button.module.css  
+│   │    |         |    |  
+│   │    |         |    ├── Card.module.css 
+│   │    |         |    |  
+│   │    |         |    ├── Form.module.css 
+│   │    |         |    | 
+│   │    |         |    ├── LoadingSpinner.module.css 
+│   │    |         |    | 
+│   │    |         |    └── Modal.module.css   
+│   │    |         |  
+│   │    |         ├── layout/ 
+│   │    |         |    ├── Layout.module.css   
+│   │    |         |    |  
+│   │    |         |    ├── MainLayout.module.css 
+│   │    |         |    |  
+│   │    |         |    └── PageWrapper.module.css  
+│   │    |         |  
+│   │    |         └── navigation/ 
+│   │    |              └── NavBar.module.css  
 │   │    |   
 │   │    ├── components/  
-│   │    |    ├── ErrorMessage.jsx  
+│   │    |    ├── common/
+│   │    |    |    ├── ErrorMessage.jsx   
+│   │    |    |    |  
+│   │    |    |    ├── LoadingSpinner.jsx  
+│   │    |    |    |  
+│   │    |    |    └── Modal.jsx   
+│   │    |    |  
+│   │    |    ├── form/ 
+│   │    |    |    ├── FormButton.jsx   
+│   │    |    |    |  
+│   │    |    |    ├── FormInput.jsx  
+│   │    |    |    |  
+│   │    |    |    └── FormTextarea.jsx  
+│   │    |    |  
+│   │    |    ├── layout/ 
+│   │    |    |    ├── MainLayout.jsx  
+│   │    |    |    |  
+│   │    |    |    ├── PageWrapper.jsx  
+│   │    |    |    |  
+│   │    |    |    └── ProtectedRoute.jsx  
+│   │    |    |  
+│   │    |    ├── navigation/ 
+│   │    |    |    └── NavBar.jsx  
+│   │    |    |  
+│   │    |    ├── thoughts/  
+│   │    |    |    ├── AllThoughts.jsx  
+│   │    |    |    |  
+│   │    |    |    ├── CreateThought.jsx  
+│   │    |    |    |  
+│   │    |    |    ├── EditThought.jsx  
+│   │    |    |    |  
+│   │    |    |    ├── FriendFeed.jsx  
+│   │    |    |    |  
+│   │    |    |    ├── PublicFeed.jsx  
+│   │    |    |    |  
+│   │    |    |    ├── ReactionList.jsx  
+│   │    |    |    |  
+│   │    |    |    └── ThoughtCard.jsx  
 │   │    |    |   
-│   │    |    ├── FormButton.jsx  
-│   │    |    |   
-│   │    |    ├── FormInput.jsx  
-│   │    |    |   
-│   │    |    ├── FormTextarea.jsx  
-│   │    |    |   
-│   │    |    ├── LoadingSpinner.jsx  
-│   │    |    |   
-│   │    |    ├── Modal.jsx  
-│   │    |    |   
-│   │    |    ├── NavBar.jsx  
-│   │    |    |   
-│   │    |    ├── PageWrapper.jsx  
-│   │    |    |   
-│   │    |    ├── ProtectedRoutes.jsx  
-│   │    |    |   
-│   │    |    ├── ReactionList.jsx  
-│   │    |    |   
-│   │    |    ├── ThoughtCard.jsx  
-│   │    |    |   
-│   │    |    └── UserCard.jsx  
+│   │    |    └── user/ 
+│   │    |         ├── FriendsList.jsx  
+│   │    |         |  
+│   │    |         ├── MyPosts.jsx  
+│   │    |         |  
+│   │    |         ├── UserCard.jsx  
+│   │    |         | 
+│   │    |         └── UserProfile.jsx  
 │   │    |   
 │   │    ├── interfaces/  
 │   │    |    ├── ApiMessages.jsx  
@@ -65,27 +108,15 @@ Module-17-Lattice/
 │   │    |    └── UserLogin.jsx  
 │   │    |   
 │   │    ├── pages/  
-│   │    |    ├── AllThoughts.jsx  
-│   │    |    |   
-│   │    |    ├── CreateThought.jsx  
-│   │    |    |   
 │   │    |    ├── Dashboard.jsx  
-│   │    |    |   
-│   │    |    ├── EditThought.jsx  
-│   │    |    |   
-│   │    |    ├── FriendsList.jsx  
 │   │    |    |   
 │   │    |    ├── Home.jsx  
 │   │    |    |   
 │   │    |    ├── Login.jsx  
 │   │    |    |   
 │   │    |    ├── NotFound.jsx  
-│   │    |    |   
-│   │    |    ├── SignUp.jsx  
-│   │    |    |   
-│   │    |    ├── SingleThought.jsx  
-│   │    |    |   
-│   │    |    └── UserProfile.jsx  
+│   │    |    |     
+│   │    |    └── SignUp.jsx  
 │   │    |   
 │   │    ├── utils/   
 │   │    │    ├── auth.js  
