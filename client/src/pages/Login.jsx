@@ -8,7 +8,8 @@ import ErrorMessage from '../components/common/ErrorMessage';
 import layoutStyles from '../assets/css/layout/Layout.module.css';
 import { login } from '../api/authAPI';
 import Auth from '../utils/auth';
-import styles from '../assets/css/form/Form.module.css';
+import styles from '../assets/css/common/Form.module.css';
+
 
 
 const Login = () => {

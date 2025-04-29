@@ -1,7 +1,7 @@
 // Module-17-Lattice/client/src/components/layout/MainLayout.jsx
 
 import React from 'react';
-import Navbar from './NavBar';
+import NavBar from '../navigation/NavBar';
 import { Outlet } from 'react-router-dom';
 
 import styles from '../../assets/css/layout/MainLayout.module.css'; 
@@ -9,7 +9,7 @@ import styles from '../../assets/css/layout/MainLayout.module.css';
 const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+      <NavBar />
 
       {/* Outer Background */}
       <div className={styles.outerBackground}>
