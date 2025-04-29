@@ -7,8 +7,11 @@ export interface IUser {
   username: string;
   email: string;
   password: string;
+  bio?: string;                
+  profilePhoto?: string;        
   thoughts: Types.ObjectId[];
   friends: Types.ObjectId[];
+  following: Types.ObjectId[];  
 }
 
 // Mongoose document with full methods
@@ -32,14 +35,31 @@ const userSchema = new Schema<UserDocument>(
       type: String,
       required: true,
     },
-    thoughts: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Thought',
-    }],
-    friends: [{
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    }],
+    bio: {
+      type: String,
+      maxlength: 160, //160 character limit for bio
+    },
+    profilePhoto: {
+      type: String,   // URL to profile photo
+    },
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Thought',
+      },
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+    following: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ], 
   },
   {
     toJSON: {

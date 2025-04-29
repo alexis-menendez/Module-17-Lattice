@@ -16,7 +16,7 @@ import {
   uploadProfilePhoto
 } from '../../controllers/userController.js';
 
-import { authenticate } from '../../middleware/authenticate.js';
+import { authenticateToken } from '../../middleware/auth.js'; 
 
 // Routes for all users
 router.route('/')
@@ -26,8 +26,8 @@ router.route('/')
 
 // Routes for the logged-in user's own profile
 router.route('/me')
-      .get(authenticate, getMyProfile)
-      .put(authenticate, updateMyProfile);
+      .get(authenticateToken, getMyProfile)
+      .put(authenticateToken, updateMyProfile);
 
       // Routes for single user access
 router.route('/:userId')

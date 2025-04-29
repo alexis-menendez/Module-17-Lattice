@@ -14,6 +14,7 @@ export interface IThought extends Document {
   createdAt: Date;
   username: string;
   reactions: IReaction[];
+  visibility: 'public' | 'private'; 
 }
 
 const reactionSchema = new Schema<IReaction>(
@@ -56,8 +57,16 @@ const thoughtSchema = new Schema<IThought>(
       type: Date,
       default: Date.now,
     },
-    username: { type: String, required: true },
+    username: {
+      type: String,
+      required: true,
+    },
     reactions: [reactionSchema],
+    visibility: {
+      type: String,
+      enum: ['public', 'private'],
+      default: 'public', // default to public
+    }, // NEW
   },
   {
     toJSON: {

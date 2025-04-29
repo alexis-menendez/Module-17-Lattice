@@ -17,7 +17,7 @@ import {
   getPublicThoughts
 } from '../../controllers/thoughtController.js';
 
-import { authenticate } from '../../middleware/authenticate.js'; // <-- you will need to create this if not already made
+import { authenticateToken } from '../../middleware/auth.js'; 
 
 // General Thought Routes
 router.route('/')
@@ -37,15 +37,15 @@ router.route('/:thoughtId/reactions/:reactionId')
 
 // User Thoughts Feed Routes
 router.route('/mine')
-      .get(authenticate, getMyThoughts);
+      .get(authenticateToken, getMyThoughts);
 
 // User Friends Thoughts Feed Routes
 router.route('/friends')
-      .get(authenticate, getFriendsThoughts);
+      .get(authenticateToken, getFriendsThoughts);
 
 // User Following Public Thoughts Feed Routes
 router.route('/following')
-      .get(authenticate, getFollowingThoughts);
+      .get(authenticateToken, getFollowingThoughts);
 
 // All Public Thoughts Feed Routes
 router.route('/public')
