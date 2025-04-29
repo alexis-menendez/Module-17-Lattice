@@ -8,7 +8,7 @@ export const signToken = (payload: object): string => {
   const secret = process.env.JWT_SECRET_KEY;
   
   if (!secret) {
-    console.error("❌ JWT_SECRET_KEY is missing from environment variables!");
+    console.error("JWT_SECRET_KEY is missing from environment variables!");
     throw new Error('Server misconfiguration: missing JWT secret');
   }
 
@@ -19,7 +19,7 @@ export const verifyToken = (token: string) => {
   const secret = process.env.JWT_SECRET_KEY;
   
   if (!secret) {
-    console.error("❌ JWT_SECRET_KEY is missing from environment variables!");
+    console.error("JWT_SECRET_KEY is missing from environment variables!");
     throw new Error('Server misconfiguration: missing JWT secret');
   }
 
