@@ -1,17 +1,17 @@
+// Module-17-Lattice/client/src/pages/UserProfile.jsx
+
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import ThoughtCard from '../components/ThoughtCard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import layoutStyles from '../assets/css/Layout.module.css';
-import Auth from '../utils/auth'; // your auth helper for token decoding
-import { fetchUserProfileById, fetchMyProfile } from '../api/userAPI'; // pretend you have a real API
+import Auth from '../utils/auth';
+import { fetchUserProfileById, fetchMyProfile } from '../api/userAPI';
 
 const UserProfile = () => {
   const { userId } = useParams();
   const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
-  const [thoughts, setThoughts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -23,19 +23,23 @@ const UserProfile = () => {
         let profileData;
 
         if (userId === 'me') {
-          // Logged-in user's own profile
           if (!Auth.loggedIn()) {
             navigate('/login');
             return;
           }
-          profileData = await fetchMyProfile(); // call your API to get the logged-in user's data
+          profileData = await fetchMyProfile(); // Logged-in user's own data
         } else {
-          // View another user's profile
-          profileData = await fetchUserProfileById(userId);
+          profileData = await fetchUserProfileById(userId); // Another user's public profile
         }
 
-        setUser(profileData.user);
-        setThoughts(profileData.thoughts);
+        setUser({
+          id: profileData._id,
+          username: profileData.username,
+          email: profileData.email || null, // Only available if you fetch your own profile
+          bio: profileData.bio || '',
+          profilePhoto: profileData.profilePhoto || '',
+          friendCount: profileData.friends?.length || 0
+        });
       } catch (err) {
         console.error(err);
         setError('Failed to load user profile.');
@@ -66,29 +70,44 @@ const UserProfile = () => {
     );
   }
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <div className={layoutStyles.container}>
       <div className="mb-12 text-center">
+        {user.profilePhoto && (
+          <img 
+            src={user.profilePhoto}
+            alt="Profile"
+            className="w-32 h-32 mx-auto mb-4 rounded-full shadow-md"
+          />
+        )}
         <h1 className="mb-2 text-4xl font-bold">{user.username}</h1>
-        <p className="mb-2 text-sm text-gray-400">{user.email}</p>
-        <p className="text-sm text-gray-500">
+
+        {/* Only show email if user is viewing their own profile */}
+        {userId === 'me' && user.email && (
+          <p className="mb-2 text-sm text-gray-400">{user.email}</p>
+        )}
+
+        {user.bio && (
+          <p className="text-sm text-gray-500">{user.bio}</p>
+        )}
+
+        <p className="mt-4 text-sm text-gray-600">
           {user.friendCount} {user.friendCount === 1 ? 'Friend' : 'Friends'}
         </p>
       </div>
 
-      <h2 className="mb-6 text-2xl font-bold text-center">Thoughts Shared</h2>
-
-      {thoughts.length === 0 ? (
-        <div className={`${layoutStyles.centeredContent}`}>
-          <p className="mb-4 text-gray-500">This user hasn't shared any thoughts yet.</p>
-        </div>
-      ) : (
-        <div className={layoutStyles.responsiveGrid}>
-          {thoughts.map((thought) => (
-            <ThoughtCard key={thought._id} thought={thought} showReactions={false} />
-          ))}
-        </div>
-      )}
+      <div className="text-center">
+        <Link 
+          to="/dashboard"
+          className="inline-block px-6 py-2 mt-6 font-semibold text-white transition bg-indigo-600 rounded hover:bg-indigo-700"
+        >
+          Back to Dashboard
+        </Link>
+      </div>
     </div>
   );
 };

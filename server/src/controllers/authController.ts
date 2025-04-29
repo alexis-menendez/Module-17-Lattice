@@ -63,7 +63,11 @@ export const login = async (req: Request, res: Response) => {
     }
 
     // Sign token
-    const token = signToken({ id: user._id, username: user.username });
+    const token = signToken({ 
+      id: user._id, 
+      username: user.username, 
+      isDev: user.isDev 
+    });
 
     // Respond with token in JSON
     return res.status(200).json({ token });

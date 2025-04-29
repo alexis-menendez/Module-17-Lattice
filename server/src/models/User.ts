@@ -11,7 +11,8 @@ export interface IUser {
   profilePhoto?: string;        
   thoughts: Types.ObjectId[];
   friends: Types.ObjectId[];
-  following: Types.ObjectId[];  
+  following: Types.ObjectId[];
+  isDev?: boolean;  
 }
 
 // Mongoose document with full methods
@@ -34,6 +35,10 @@ const userSchema = new Schema<UserDocument>(
     password: {
       type: String,
       required: true,
+    },
+    isDev: {
+      type: Boolean,
+      default: false
     },
     bio: {
       type: String,

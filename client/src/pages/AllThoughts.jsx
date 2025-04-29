@@ -1,72 +1,105 @@
 // Module-17-Lattice/client/src/pages/AllThoughts.jsx
 
 import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import ThoughtCard from '../components/ThoughtCard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import layoutStyles from '../assets/css/Layout.module.css';
+import { retrieveThoughts } from '../api/thoughtAPI'; // Fetch ALL thoughts (no filtering)
+import Auth from '../utils/auth';
 
 const AllThoughts = () => {
   const [thoughts, setThoughts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Simulate API call for now
-    const fetchThoughts = async () => {
+    const loadAllPosts = async () => {
       try {
         setIsLoading(true);
-        // Replace with real API fetch when ready
-        setTimeout(() => {
-          setThoughts([
-            {
-              _id: '1',
-              thoughtText: 'Did you know mushrooms are more closely related to humans than plants?',
-              createdAt: new Date().toISOString(),
-              username: 'FungiFan',
-              reactionCount: 3,
-              reactions: []
-            },
-            {
-              _id: '2',
-              thoughtText: 'Lattice community is amazing!',
-              createdAt: new Date().toISOString(),
-              username: 'MycoLover',
-              reactionCount: 1,
-              reactions: []
-            }
-          ]);
-          setIsLoading(false);
-        }, 1000);
-      } catch (error) {
-        console.error(error);
+
+        // Check if user is logged in
+        if (!Auth.loggedIn()) {
+          window.location.assign('/login');
+          return;
+        }
+
+        // Decode token and check for dev flag
+        const profile = Auth.getProfile();
+        if (!profile || !profile.data || !profile.data.isDev) {
+          console.warn('Access denied: Not a developer.');
+          navigate('/unauthorized'); // Create a simple Unauthorized page if you want
+          return;
+        }
+
+        const allThoughts = await retrieveThoughts();
+
+        const formattedThoughts = allThoughts.map((thought) => ({
+          id: thought._id,
+          thoughtText: thought.thoughtText,
+          username: thought.username,
+          createdAt: thought.createdAt,
+          reactionCount: thought.reactions?.length || 0,
+          visibility: thought.visibility || 'public',
+          reactions: thought.reactions || []
+        }));
+
+        // 🛠 Sort newest to oldest
+        formattedThoughts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        setThoughts(formattedThoughts);
+      } catch (err) {
+        console.error('Error loading all thoughts:', err);
+        setError('Failed to load all posts.');
+      } finally {
         setIsLoading(false);
       }
     };
 
-    fetchThoughts();
-  }, []);
+    loadAllPosts();
+  }, [navigate]);
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
-  if (thoughts.length === 0) {
+  if (error) {
     return (
-      <div className={`${layoutStyles.centeredContent}`}>
-        <h2 className="mb-4 text-2xl font-bold">No Thoughts Yet</h2>
-        <p className="text-gray-500">Be the first to share your mushroom musings! 🍄</p>
+      <div className={layoutStyles.centeredContent}>
+        <h2 className="mb-4 text-2xl font-bold text-red-600">Error</h2>
+        <p className="text-gray-500">{error}</p>
+        <Link 
+          to="/dashboard" 
+          className="inline-block px-6 py-2 mt-6 font-semibold text-white transition bg-indigo-600 rounded hover:bg-indigo-700"
+        >
+          Back to Dashboard
+        </Link>
       </div>
     );
   }
 
   return (
     <div className={layoutStyles.container}>
-      <h1 className="mb-8 text-3xl font-bold text-center">All Thoughts</h1>
+      <h1 className="mb-8 text-4xl font-bold text-center">All Thoughts (Developer Only)</h1>
 
-      <div className={layoutStyles.responsiveGrid}>
-        {thoughts.map((thought) => (
-          <ThoughtCard key={thought._id} thought={thought} showReactions={false} />
-        ))}
-      </div>
+      {thoughts.length === 0 ? (
+        <div className={layoutStyles.centeredContent}>
+          <p className="mb-4 text-gray-400">No thoughts found yet.</p>
+          <Link 
+            to="/dashboard" 
+            className="inline-block px-6 py-2 font-semibold text-white transition bg-green-600 rounded hover:bg-green-700"
+          >
+            Back to Dashboard
+          </Link>
+        </div>
+      ) : (
+        <div className={layoutStyles.responsiveGrid}>
+          {thoughts.map((thought) => (
+            <ThoughtCard key={thought.id} thought={thought} showReactions={false} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,51 +1,47 @@
-// Module-17-Lattice/client/src/pages/MyPosts.jsx
+// Module-17-Lattice/client/src/components/PublicFeed.jsx
 
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ThoughtCard from '../components/ThoughtCard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import layoutStyles from '../assets/css/Layout.module.css';
-import Auth from '../utils/auth';
-import { fetchMyThoughts } from '../api/thoughtAPI'; 
+import { fetchPublicThoughts } from '../api/thoughtAPI'; 
 
-const MyPosts = () => {
+const PublicFeed = () => {
   const [thoughts, setThoughts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const loadMyPosts = async () => {
+    const loadPublicPosts = async () => {
       try {
         setIsLoading(true);
 
-        if (!Auth.loggedIn()) {
-          window.location.assign('/login');
-          return;
-        }
+        const publicThoughts = await fetchPublicThoughts();
 
-        const myThoughts = await fetchMyThoughts();
-
-        // Map _id from server to id for frontend consistency
-        const formattedThoughts = myThoughts.map((thought) => ({
+        const formattedThoughts = publicThoughts.map((thought) => ({
           id: thought._id,
           thoughtText: thought.thoughtText,
           username: thought.username,
           createdAt: thought.createdAt,
           reactionCount: thought.reactions?.length || 0,
-          visibility: thought.visibility || 'public', // fallback just in case
+          visibility: thought.visibility || 'public',
           reactions: thought.reactions || []
         }));
 
+        // 🛠 Sort newest to oldest
+        formattedThoughts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
         setThoughts(formattedThoughts);
       } catch (err) {
-        console.error(err);
-        setError('Failed to load your posts.');
+        console.error('Error loading public feed:', err);
+        setError('Failed to load public posts.');
       } finally {
         setIsLoading(false);
       }
     };
 
-    loadMyPosts();
+    loadPublicPosts();
   }, []);
 
   if (isLoading) {
@@ -69,16 +65,16 @@ const MyPosts = () => {
 
   return (
     <div className={layoutStyles.container}>
-      <h1 className="mb-8 text-4xl font-bold text-center">My Posts</h1>
+      <h1 className="mb-8 text-4xl font-bold text-center">Public Thoughts</h1>
 
       {thoughts.length === 0 ? (
         <div className={layoutStyles.centeredContent}>
-          <p className="mb-4 text-gray-400">You haven't posted anything yet.</p>
+          <p className="mb-4 text-gray-400">No public posts found yet.</p>
           <Link 
-            to="/create-thought" 
+            to="/dashboard" 
             className="inline-block px-6 py-2 font-semibold text-white transition bg-green-600 rounded hover:bg-green-700"
           >
-            Create Your First Thought
+            Back to Dashboard
           </Link>
         </div>
       ) : (
@@ -92,4 +88,4 @@ const MyPosts = () => {
   );
 };
 
-export default MyPosts;
+export default PublicFeed;

@@ -5,6 +5,7 @@ export const users = [
     username: "WhimsyWoods",
     email: "alexis.246.menendez@gmail.com",
     password: "test123",
+    isDev: true,
     thoughts: [],
     friends: []
   },
@@ -12,6 +13,7 @@ export const users = [
     username: "MycoMama",
     email: "mycomama@latticefungi.com",
     password: "test123",
+    isDev: false,
     thoughts: [],
     friends: []
   },
@@ -19,6 +21,7 @@ export const users = [
     username: "SporeLore",
     email: "sporelore@latticefungi.com",
     password: "test123",
+    isDev: false,
     thoughts: [],
     friends: []
   },
@@ -26,6 +29,7 @@ export const users = [
     username: "CapCollector",
     email: "capcollector@latticefungi.com",
     password: "test123",
+    isDev: false,
     thoughts: [],
     friends: []
   },
@@ -33,6 +37,7 @@ export const users = [
     username: "SporeSprite",
     email: "sporesprite@latticefungi.com",
     password: "test123",
+    isDev: false,
     thoughts: [],
     friends: []
   },
@@ -40,6 +45,7 @@ export const users = [
     username: "MycoMuse",
     email: "mycomuse@latticefungi.com",
     password: "test123",
+    isDev: false,
     thoughts: [],
     friends: []
   },
@@ -47,6 +53,7 @@ export const users = [
     username: "MossyMinds",
     email: "mossyminds@latticefungi.com",
     password: "test123",
+    isDev: false,
     thoughts: [],
     friends: []
   },
@@ -54,6 +61,7 @@ export const users = [
     username: "GillsAndThrills",
     email: "gillsandthrills@latticefungi.com",
     password: "test123",
+    isDev: false,
     thoughts: [],
     friends: []
   },
@@ -61,6 +69,7 @@ export const users = [
     username: "FungalFriend",
     email: "fungalfriend@latticefungi.com",
     password: "test123",
+    isDev: false,
     thoughts: [],
     friends: []
   },
@@ -68,6 +77,7 @@ export const users = [
     username: "ShroomBloom",
     email: "shroombloom@latticefungi.com",
     password: "test123",
+    isDev: false,
     thoughts: [],
     friends: []
   },
@@ -75,6 +85,7 @@ export const users = [
     username: "LichenLover",
     email: "lichenlover@latticefungi.com",
     password: "test123",
+    isDev: false,
     thoughts: [],
     friends: []
   },
@@ -82,6 +93,7 @@ export const users = [
       username: "ForagerFox",
       email: "foragerfox@latticefungi.com",
       password: "test123",
+      isDev: false,
       thoughts: [],
       friends: []
     },
@@ -89,6 +101,7 @@ export const users = [
       username: "HiddenHyphae",
       email: "hiddenhyphae@latticefungi.com",
       password: "test123",
+      isDev: false,
       thoughts: [],
       friends: []
     },
@@ -96,6 +109,7 @@ export const users = [
       username: "TruffleTroubadour",
       email: "truffletroubadour@latticefungi.com",
       password: "test123",
+      isDev: false,
       thoughts: [],
       friends: []
     },
@@ -103,6 +117,7 @@ export const users = [
       username: "PuffballPal",
       email: "puffballpal@latticefungi.com",
       password: "test123",
+      isDev: false,
       thoughts: [],
       friends: []
     }
