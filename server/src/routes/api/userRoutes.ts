@@ -23,19 +23,22 @@ router.route('/')
       .get(getUsers)
       .post(createUser);
 
-
 // Routes for the logged-in user's own profile
 router.route('/me')
       .get(authenticateToken, getMyProfile)
       .put(authenticateToken, updateMyProfile);
 
-      // Routes for single user access
+// Upload profile photo
+router.route('/me/photo')
+      .post(authenticateToken, uploadProfilePhoto);
+
+// Routes for single user access
 router.route('/:userId')
       router.route('/:userId').get(getSingleUser);
       router.route('/:userId').put(updateUser);
       router.route('/:userId').delete(deleteUser);
 
-      // Routes for user's friends
+// Routes for user's friends
 router.route('/:userId/friends')
       .get(getFriends);
 
