@@ -1,10 +1,13 @@
 // Module-17-Lattice/client/src/api/thoughtAPI.jsx
 
-import Auth from '../utils/auth'; // Assuming you have an Auth utility that gets the token
+import Auth from '../utils/auth'; 
 
+const API_BASE_URL = '/api/thoughts';
+
+// Retrieve all thoughts (general)
 const retrieveThoughts = async () => {
   try {
-    const response = await fetch('/api/thoughts/', {
+    const response = await fetch(`${API_BASE_URL}`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${Auth.getToken()}`
@@ -14,7 +17,7 @@ const retrieveThoughts = async () => {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error('Invalid API response, check network tab!');
+      throw new Error(data.message || 'Failed to fetch thoughts');
     }
 
     return data;
@@ -24,9 +27,10 @@ const retrieveThoughts = async () => {
   }
 };
 
+// Retrieve a single thought by ID
 const retrieveThought = async (id) => {
   try {
-    const response = await fetch(`/api/thoughts/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${Auth.getToken()}`
@@ -36,7 +40,7 @@ const retrieveThought = async (id) => {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error('Invalid API response, check network tab!');
+      throw new Error(data.message || 'Failed to fetch thought');
     }
 
     return data;
@@ -46,9 +50,10 @@ const retrieveThought = async (id) => {
   }
 };
 
+// Create a new thought
 const createThought = async (body) => {
   try {
-    const response = await fetch('/api/thoughts/', {
+    const response = await fetch(`${API_BASE_URL}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -60,7 +65,7 @@ const createThought = async (body) => {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error('Invalid API response, check network tab!');
+      throw new Error(data.message || 'Failed to create thought');
     }
 
     return data;
@@ -70,10 +75,11 @@ const createThought = async (body) => {
   }
 };
 
+// Update an existing thought
 const updateThought = async (thoughtId, body) => {
   try {
-    const response = await fetch(`/api/thoughts/${thoughtId}`, {
-      method: 'PUT',
+    const response = await fetch(`${API_BASE_URL}/${thoughtId}`, {
+      method: 'PATCH', // Use PATCH for partial updates
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${Auth.getToken()}`
@@ -84,7 +90,7 @@ const updateThought = async (thoughtId, body) => {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error('Invalid API response, check network tab!');
+      throw new Error(data.message || 'Failed to update thought');
     }
 
     return data;
@@ -94,9 +100,10 @@ const updateThought = async (thoughtId, body) => {
   }
 };
 
+// Delete a thought
 const deleteThought = async (thoughtId) => {
   try {
-    const response = await fetch(`/api/thoughts/${thoughtId}`, {
+    const response = await fetch(`${API_BASE_URL}/${thoughtId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -107,7 +114,7 @@ const deleteThought = async (thoughtId) => {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error('Invalid API response, check network tab!');
+      throw new Error(data.message || 'Failed to delete thought');
     }
 
     return data;
@@ -117,4 +124,105 @@ const deleteThought = async (thoughtId) => {
   }
 };
 
-export { createThought, deleteThought, retrieveThoughts, retrieveThought, updateThought };
+// Retrieve logged-in user's own thoughts
+const fetchMyThoughts = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/mine`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Auth.getToken()}`
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to fetch your thoughts');
+    }
+
+    return data;
+  } catch (err) {
+    console.error('Error fetching your thoughts:', err);
+    return Promise.reject('Could not fetch your thoughts');
+  }
+};
+
+// Retrieve friends' thoughts
+const fetchFriendsThoughts = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/friends`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Auth.getToken()}`
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to fetch friends\' thoughts');
+    }
+
+    return data;
+  } catch (err) {
+    console.error('Error fetching friends\' thoughts:', err);
+    return Promise.reject('Could not fetch friends\' thoughts');
+  }
+};
+
+// Retrieve following thoughts
+const fetchFollowingThoughts = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/following`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Auth.getToken()}`
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to fetch following thoughts');
+    }
+
+    return data;
+  } catch (err) {
+    console.error('Error fetching following thoughts:', err);
+    return Promise.reject('Could not fetch following thoughts');
+  }
+};
+
+// Retrieve public thoughts
+const fetchPublicThoughts = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/public`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to fetch public thoughts');
+    }
+
+    return data;
+  } catch (err) {
+    console.error('Error fetching public thoughts:', err);
+    return Promise.reject('Could not fetch public thoughts');
+  }
+};
+
+export { 
+  createThought,
+  deleteThought,
+  retrieveThoughts,
+  retrieveThought,
+  updateThought,
+  fetchMyThoughts,
+  fetchFriendsThoughts,
+  fetchFollowingThoughts,
+  fetchPublicThoughts
+};

@@ -7,16 +7,19 @@
  * @property {string|null} username - The username of the poster
  * @property {string|null} createdAt - The date the thought was created
  * @property {number|null} reactionCount - Number of reactions the thought has
+ * @property {string|null} visibility - Whether the thought is public or private
+ * @property {Array<Object>|null} reactions - List of reactions (optional)
  */
 
 /** @type {ThoughtData} */
 const defaultThoughtData = {
-    id: null,
-    thoughtText: null,
-    username: null,
-    createdAt: null,
-    reactionCount: null
-  };
-  
-  export default defaultThoughtData;
-  
+  id: null,
+  thoughtText: null,
+  username: null,
+  createdAt: null,
+  reactionCount: null,
+  visibility: null,
+  reactions: null
+};
+
+export default defaultThoughtData;
