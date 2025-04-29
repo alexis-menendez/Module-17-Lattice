@@ -1,85 +1,37 @@
 // Module-17-Lattice/client/src/pages/Dashboard.jsx
 
-import React, { useEffect, useState } from 'react';
-import ThoughtCard from '../components/ThoughtCard';
-import LoadingSpinner from '../components/LoadingSpinner';
-import layoutStyles from '../assets/css/Layout.module.css';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import layoutStyles from '../assets/css/Layout.module.css';
+import buttonStyles from '../assets/css/Button.module.css'; // assuming you already have nice button styles
 
 const Dashboard = () => {
-  const [thoughts, setThoughts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate fetching the user's own thoughts
-    const fetchUserThoughts = async () => {
-      try {
-        setIsLoading(true);
-        // Replace with real API call
-        setTimeout(() => {
-          setThoughts([
-            {
-              _id: '1',
-              thoughtText: 'Excited to explore mushroom bioluminescence! 🌟',
-              createdAt: new Date().toISOString(),
-              username: 'MycoMe',
-              reactionCount: 5,
-              reactions: []
-            },
-            {
-              _id: '2',
-              thoughtText: 'Anyone else notice morels after spring rains? 🍄',
-              createdAt: new Date().toISOString(),
-              username: 'MycoMe',
-              reactionCount: 2,
-              reactions: []
-            }
-          ]);
-          setIsLoading(false);
-        }, 1000);
-      } catch (error) {
-        console.error(error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchUserThoughts();
-  }, []);
-
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
   return (
     <div className={layoutStyles.container}>
-      <h1 className="mb-6 text-3xl font-bold text-center">Your Dashboard</h1>
+      <h1 className="mb-10 text-4xl font-bold text-center">Dashboard</h1>
 
-      <div className="mb-8 text-center">
-        <Link 
-          to="/create-thought" 
-          className="inline-block px-4 py-2 font-semibold text-white transition bg-indigo-600 rounded hover:bg-indigo-700"
-        >
-          Share a New Thought
+      {/* Navigation Buttons */}
+      <div className="flex flex-wrap justify-center gap-6">
+        <Link to="/profile/me" className={buttonStyles.primaryButton}>
+          View Profile
+        </Link>
+
+        <Link to="/dashboard/posts" className={buttonStyles.primaryButton}>
+          My Posts
+        </Link>
+
+        <Link to="/friends-feed" className={buttonStyles.primaryButton}>
+          Friends Feed
+        </Link>
+
+        <Link to="/following-feed" className={buttonStyles.primaryButton}>
+          Following Feed
+        </Link>
+
+        <Link to="/thoughts" className={buttonStyles.primaryButton}>
+          Public Feed
         </Link>
       </div>
-
-      {thoughts.length === 0 ? (
-        <div className={`${layoutStyles.centeredContent}`}>
-          <p className="mb-4 text-gray-500">You haven't shared any thoughts yet.</p>
-          <Link 
-            to="/create-thought" 
-            className="inline-block px-4 py-2 font-semibold text-white transition bg-green-600 rounded hover:bg-green-700"
-          >
-            Create Your First Thought
-          </Link>
-        </div>
-      ) : (
-        <div className={layoutStyles.responsiveGrid}>
-          {thoughts.map((thought) => (
-            <ThoughtCard key={thought._id} thought={thought} showReactions={false} />
-          ))}
-        </div>
-      )}
     </div>
   );
 };

@@ -10,21 +10,37 @@ import {
   deleteUser,  
   addFriend,   
   removeFriend,   
-  getFriends 
+  getFriends,
+  getMyProfile,
+  updateMyProfile,
+  uploadProfilePhoto
 } from '../../controllers/userController.js';
 
+import { authenticate } from '../../middleware/authenticate.js';
+
+// Routes for all users
 router.route('/')
       .get(getUsers)
       .post(createUser);
 
-router.route('/:userId').get(getSingleUser);
-router.route('/:userId').delete(deleteUser);
-router.route('/:userId').put(updateUser);
 
-router.route('/:userId/friends').get(getFriends);
+// Routes for the logged-in user's own profile
+router.route('/me')
+      .get(authenticate, getMyProfile)
+      .put(authenticate, updateMyProfile);
+
+      // Routes for single user access
+router.route('/:userId')
+      router.route('/:userId').get(getSingleUser);
+      router.route('/:userId').put(updateUser);
+      router.route('/:userId').delete(deleteUser);
+
+      // Routes for user's friends
+router.route('/:userId/friends')
+      .get(getFriends);
 
 router.route('/:userId/friends/:friendId')
-  .post(addFriend)
-  .delete(removeFriend);
+      .post(addFriend)
+      .delete(removeFriend);
 
 export default router;

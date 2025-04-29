@@ -1,62 +1,51 @@
-// Module-17-Lattice/client/src/pages/UserProfile.jsx
-
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import ThoughtCard from '../components/ThoughtCard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import layoutStyles from '../assets/css/Layout.module.css';
+import Auth from '../utils/auth'; // your auth helper for token decoding
+import { fetchUserProfileById, fetchMyProfile } from '../api/userAPI'; // pretend you have a real API
 
 const UserProfile = () => {
   const { userId } = useParams();
+  const navigate = useNavigate();
+
   const [user, setUser] = useState(null);
   const [thoughts, setThoughts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
+    const loadProfile = async () => {
       try {
         setIsLoading(true);
-        // Simulate API fetch for user profile
-        setTimeout(() => {
-          // Replace with real API call
-          setUser({
-            _id: userId,
-            username: 'MycoAdventurer',
-            email: 'myco@adventure.com',
-            friendCount: 8,
-          });
 
-          setThoughts([
-            {
-              _id: 'thought1',
-              thoughtText: 'Mushroom spores can travel thousands of miles!',
-              createdAt: new Date().toISOString(),
-              username: 'MycoAdventurer',
-              reactionCount: 4,
-              reactions: [],
-            },
-            {
-              _id: 'thought2',
-              thoughtText: 'Anyone else spotting morels this season? 🍄',
-              createdAt: new Date().toISOString(),
-              username: 'MycoAdventurer',
-              reactionCount: 2,
-              reactions: [],
-            },
-          ]);
+        let profileData;
 
-          setIsLoading(false);
-        }, 1000);
+        if (userId === 'me') {
+          // Logged-in user's own profile
+          if (!Auth.loggedIn()) {
+            navigate('/login');
+            return;
+          }
+          profileData = await fetchMyProfile(); // call your API to get the logged-in user's data
+        } else {
+          // View another user's profile
+          profileData = await fetchUserProfileById(userId);
+        }
+
+        setUser(profileData.user);
+        setThoughts(profileData.thoughts);
       } catch (err) {
         console.error(err);
         setError('Failed to load user profile.');
+      } finally {
         setIsLoading(false);
       }
     };
 
-    fetchUserProfile();
-  }, [userId]);
+    loadProfile();
+  }, [userId, navigate]);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -81,8 +70,8 @@ const UserProfile = () => {
     <div className={layoutStyles.container}>
       <div className="mb-12 text-center">
         <h1 className="mb-2 text-4xl font-bold">{user.username}</h1>
-        <p className="mb-2 text-sm text-gray-500">{user.email}</p>
-        <p className="text-sm text-gray-600">
+        <p className="mb-2 text-sm text-gray-400">{user.email}</p>
+        <p className="text-sm text-gray-500">
           {user.friendCount} {user.friendCount === 1 ? 'Friend' : 'Friends'}
         </p>
       </div>

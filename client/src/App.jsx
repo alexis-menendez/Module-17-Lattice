@@ -1,5 +1,3 @@
-// Module-17-Lattice/client/src/App.jsx
-
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
@@ -15,112 +13,92 @@ import NotFound from './pages/NotFound';
 import SignUp from './pages/SignUp';
 import SingleThought from './pages/SingleThought';
 import UserProfile from './pages/UserProfile';
+import MyPosts from './components/MyPosts'; // ✅ Add this line
 
 // Components
-import ErrorMessage from './components/ErrorMessage';
-import FormButton from './components/FormButton';
-import FormInput from './components/FormInput';
-import FormTextarea from './components/FormTextarea';
-import LoadingSpinner from './components/LoadingSpinner';
-import Modal from './components/Modal';
-import Navbar from './components/Navbar';
-import PageWrapper from './components/PageWrapper';
+import MainLayout from './components/MainLayout';
 import ProtectedRoute from './components/ProtectedRoute';
-import ReactionList from './components/ReactionList';
-import ThoughtCard from './components/ThoughtCard';
-import UserCard from './components/UserCard';
-
-// Helper to automatically wrap pages with PageWrapper
-const WrappedRoute = ({ children }) => (
-  <PageWrapper>
-    {children}
-  </PageWrapper>
-);
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Routes>
+    <Routes>
+      {/* Everything wrapped inside MainLayout */}
+      <Route element={<MainLayout />}>
         {/* Public Pages */}
-        <Route 
-          path="/" 
-          element={<WrappedRoute><Home /></WrappedRoute>} 
-        />
-        <Route 
-          path="/login" 
-          element={<WrappedRoute><Login /></WrappedRoute>} 
-        />
-        <Route 
-          path="/signup" 
-          element={<WrappedRoute><SignUp /></WrappedRoute>} 
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
 
         {/* Protected Pages */}
-        <Route 
-          path="/dashboard" 
+        <Route
+          path="/dashboard"
           element={
             <ProtectedRoute>
-              <WrappedRoute><Dashboard /></WrappedRoute>
+              <Dashboard />
             </ProtectedRoute>
           }
         />
-        <Route 
-          path="/thoughts" 
+        <Route
+          path="/dashboard/posts" // ✅ Add this route
           element={
             <ProtectedRoute>
-              <WrappedRoute><AllThoughts /></WrappedRoute>
+              <MyPosts />
             </ProtectedRoute>
           }
         />
-        <Route 
-          path="/thoughts/:thoughtId" 
+        <Route
+          path="/thoughts"
           element={
             <ProtectedRoute>
-              <WrappedRoute><SingleThought /></WrappedRoute>
+              <AllThoughts />
             </ProtectedRoute>
           }
         />
-        <Route 
-          path="/create-thought" 
+        <Route
+          path="/thoughts/:thoughtId"
           element={
             <ProtectedRoute>
-              <WrappedRoute><CreateThought /></WrappedRoute>
+              <SingleThought />
             </ProtectedRoute>
           }
         />
-        <Route 
-          path="/edit-thought/:thoughtId" 
+        <Route
+          path="/create-thought"
           element={
             <ProtectedRoute>
-              <WrappedRoute><EditThought /></WrappedRoute>
+              <CreateThought />
             </ProtectedRoute>
           }
         />
-        <Route 
-          path="/friends" 
+        <Route
+          path="/edit-thought/:thoughtId"
           element={
             <ProtectedRoute>
-              <WrappedRoute><FriendsList /></WrappedRoute>
+              <EditThought />
             </ProtectedRoute>
           }
         />
-        <Route 
-          path="/profile/:userId" 
+        <Route
+          path="/friends"
           element={
             <ProtectedRoute>
-              <WrappedRoute><UserProfile /></WrappedRoute>
+              <FriendsList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile/:userId"
+          element={
+            <ProtectedRoute>
+              <UserProfile />
             </ProtectedRoute>
           }
         />
 
         {/* 404 Page */}
-        <Route 
-          path="*" 
-          element={<WrappedRoute><NotFound /></WrappedRoute>} 
-        />
-      </Routes>
-    </>
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 
