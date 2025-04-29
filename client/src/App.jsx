@@ -3,7 +3,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-// Layout
+// Layout (components)
 import MainLayout from './components/layout/MainLayout';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 
@@ -14,7 +14,7 @@ import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 
-// Thoughts
+// Thoughts (components)
 import CreateThought from './components/thoughts/CreateThought';
 import EditThought from './components/thoughts/EditThought';
 import SingleThought from './components/thoughts/SingleThought';
@@ -23,7 +23,7 @@ import FriendFeed from './components/thoughts/FriendFeed';
 import PublicFeed from './components/thoughts/PublicFeed';
 import FollowFeed from './components/thoughts/FollowFeed';
 
-// User
+// User (components)
 import FriendsList from './components/user/FriendsList';
 import MyPosts from './components/user/MyPosts';
 import UserProfile from './components/user/UserProfile';

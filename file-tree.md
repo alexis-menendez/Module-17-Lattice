@@ -89,6 +89,8 @@ Module-17-Lattice/
 │   │    |    |    |  
 │   │    |    |    ├── ReactionList.jsx  
 │   │    |    |    |  
+│   │    |    |    ├── SingleThought.jsx  
+│   │    |    |    |  
 │   │    |    |    └── ThoughtCard.jsx  
 │   │    |    |   
 │   │    |    └── user/ 
