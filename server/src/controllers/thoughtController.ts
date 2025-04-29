@@ -168,7 +168,7 @@ export const getFriendsThoughts = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'No user found.' });
     }
 
-    const friendsUsernames = (user.friends as { username: string }[]).map(friend => friend.username);
+    const friendsUsernames = (user.friends as unknown as { username: string }[]).map(friend => friend.username);
 
     const thoughts = await Thought.find({ 
       username: { $in: friendsUsernames }
@@ -189,7 +189,7 @@ export const getFollowingThoughts = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'No user found.' });
     }
 
-    const followingUsernames = (user.following as { username: string }[]).map(follow => follow.username);
+    const followingUsernames = (user.following as unknown as { username: string }[]).map(follow => follow.username);
 
     const thoughts = await Thought.find({ 
       username: { $in: followingUsernames },

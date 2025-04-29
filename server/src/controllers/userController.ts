@@ -137,7 +137,7 @@ export const getFriends = async (req: Request, res: Response) => {
 // Get logged-in user's profile
 export const getMyProfile = async (req: Request, res: Response) => {
   try {
-    const user = await User.findById(req.user.id).select('-__v -password');
+    const user = await User.findById(req.user!.id).select('-__v -password');
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -155,7 +155,7 @@ export const updateMyProfile = async (req: Request, res: Response) => {
     const { username, bio, profilePhoto } = req.body;
 
     const updatedUser = await User.findByIdAndUpdate(
-      req.user.id,
+       req.user!.id,
       { 
         ...(username && { username }),
         ...(bio && { bio }),
@@ -184,7 +184,7 @@ export const uploadProfilePhoto = async (req: Request, res: Response) => {
     }
 
     const updatedUser = await User.findByIdAndUpdate(
-      req.user.id,
+      req.user!.id,
       { profilePhoto },
       { runValidators: true, new: true }
     );
