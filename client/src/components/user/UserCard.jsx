@@ -1,8 +1,9 @@
 // Module-17-Lattice/client/src/components/user/UserCard.jsx
 
 import React from 'react';
-import cardStyles from '../assets/css/Card.module.css';
+import cardStyles from '../../assets/css/common/Card.module.css';
 import { Link } from 'react-router-dom';
+
 
 const UserCard = ({ user }) => {
   if (!user) return null;

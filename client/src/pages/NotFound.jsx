@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import layoutStyles from '../assets/css/Layout.module.css';
+import layoutStyles from '../assets/css/layout/Layout.module.css';
 
 const NotFound = () => {
   return (

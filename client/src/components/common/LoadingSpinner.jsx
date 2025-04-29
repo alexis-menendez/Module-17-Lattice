@@ -1,7 +1,7 @@
 // Module-17-Lattice/client/src/components/common/LoadingSpinner.jsx
 
 import React from 'react';
-import spinnerStyles from '../assets/css/LoadingSpinner.module.css';
+import spinnerStyles from '../../assets/css/common/LoadingSpinner.module.css'; 
 
 const LoadingSpinner = () => {
   return (

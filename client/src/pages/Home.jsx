@@ -3,6 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-[70vh] p-8 text-center">

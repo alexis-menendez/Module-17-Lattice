@@ -1,12 +1,11 @@
-// Module-17-Lattice/client/src/components/thoughts/AllThoughts.jsx
-
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import ThoughtCard from '../components/ThoughtCard';
-import LoadingSpinner from '../components/LoadingSpinner';
-import layoutStyles from '../assets/css/Layout.module.css';
-import { retrieveThoughts } from '../api/thoughtAPI'; // Fetch ALL thoughts (no filtering)
-import Auth from '../utils/auth';
+import ThoughtCard from './ThoughtCard';
+import LoadingSpinner from '../common/LoadingSpinner';
+import layoutStyles from '../../assets/css/layout/Layout.module.css';
+import { retrieveThoughts } from '../../api/thoughtAPI';
+import Auth from '../../utils/auth';
+
 
 const AllThoughts = () => {
   const [thoughts, setThoughts] = useState([]);

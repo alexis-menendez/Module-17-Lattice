@@ -2,9 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { retrieveThought } from '../../api/thoughtAPI'; // API to fetch single thought
+import { retrieveThought } from '../../api/thoughtAPI';
 import LoadingSpinner from '../common/LoadingSpinner';
-import layoutStyles from '../../assets/css/Layout.module.css';
+import layoutStyles from '../../assets/css/layout/Layout.module.css';
+
 
 const SingleThought = () => {
   const { thoughtId } = useParams();

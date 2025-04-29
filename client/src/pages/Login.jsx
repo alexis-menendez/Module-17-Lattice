@@ -2,13 +2,14 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FormInput from '../components/FormInput';
-import FormButton from '../components/FormButton';
-import ErrorMessage from '../components/ErrorMessage';
-import layoutStyles from '../assets/css/Layout.module.css';
+import FormInput from '../components/form/FormInput';
+import FormButton from '../components/form/FormButton';
+import ErrorMessage from '../components/common/ErrorMessage';
+import layoutStyles from '../assets/css/layout/Layout.module.css';
 import { login } from '../api/authAPI';
-import Auth from '../utils/auth'; // token handler
-import styles from '../assets/css/Form.module.css';
+import Auth from '../utils/auth';
+import styles from '../assets/css/form/Form.module.css';
+
 
 const Login = () => {
   const navigate = useNavigate();

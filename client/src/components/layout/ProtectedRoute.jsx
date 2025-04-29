@@ -1,8 +1,11 @@
 // Module-17-Lattice/client/src/components/layout/ProtectedRoute.jsx
 
+// Module-17-Lattice/client/src/components/layout/ProtectedRoute.jsx
+
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import Auth from '../utils/auth'; // Your auth utility
+import Auth from '../../utils/auth'; 
+
 
 const ProtectedRoute = ({ children }) => {
   if (!Auth.loggedIn()) {

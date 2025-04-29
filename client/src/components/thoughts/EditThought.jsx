@@ -2,11 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import FormTextarea from '../components/FormTextarea';
-import FormButton from '../components/FormButton';
-import LoadingSpinner from '../components/LoadingSpinner';
-import ErrorMessage from '../components/ErrorMessage';
-import layoutStyles from '../assets/css/Layout.module.css';
+import FormTextarea from '../form/FormTextarea';
+import FormButton from '../form/FormButton';
+import LoadingSpinner from '../common/LoadingSpinner';
+import ErrorMessage from '../common/ErrorMessage';
+import layoutStyles from '../../assets/css/layout/Layout.module.css';
+
 
 const EditThought = () => {
   const { thoughtId } = useParams();

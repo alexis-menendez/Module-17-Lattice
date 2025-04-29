@@ -4,7 +4,7 @@ import React from 'react';
 import Navbar from './NavBar';
 import { Outlet } from 'react-router-dom';
 
-import styles from '../assets/css/MainLayout.module.css';
+import styles from '../../assets/css/layout/MainLayout.module.css'; 
 
 const MainLayout = () => {
   return (

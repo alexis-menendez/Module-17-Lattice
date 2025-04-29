@@ -1,8 +1,8 @@
 // Module-17-Lattice/client/src/components/form/FormTextarea.jsx
 
 import React from 'react';
-import formStyles from '../assets/css/Form.module.css';
-import ErrorMessage from './ErrorMessage'; 
+import formStyles from '../../assets/css/common/Form.module.css'; 
+import ErrorMessage from '../common/ErrorMessage'; 
 
 const FormTextarea = ({
   label,

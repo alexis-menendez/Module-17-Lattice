@@ -1,7 +1,7 @@
 // Module-17-Lattice/client/src/components/common/Modal.jsx
 
 import React from 'react';
-import modalStyles from '../assets/css/Modal.module.css';
+import modalStyles from '../../assets/css/common/Modal.module.css';
 
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;

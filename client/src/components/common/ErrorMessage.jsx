@@ -1,7 +1,7 @@
 // Module-17-Lattice/client/src/components/common/ErrorMessage.jsx
 
 import React from 'react';
-import styles from '../assets/css/Form.module.css'; // Reusing error styles from Form.module.css
+import formStyles from '../../assets/css/common/Form.module.css'; 
 
 const ErrorMessage = ({ message }) => {
   if (!message) return null; // If no message provided, don't render anything

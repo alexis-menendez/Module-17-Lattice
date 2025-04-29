@@ -1,7 +1,8 @@
 // Module-17-Lattice/client/src/components/thoughts/ReactionList.jsx
 
 import React from 'react';
-import cardStyles from '../assets/css/Card.module.css'; 
+import cardStyles from '../../assets/css/common/Card.module.css';
+
 
 const ReactionList = ({ reactions = [] }) => {
   if (reactions.length === 0) {

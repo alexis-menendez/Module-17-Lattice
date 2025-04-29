@@ -1,9 +1,10 @@
 // Module-17-Lattice/client/src/components/user/FriendsList.jsx
 
 import React, { useEffect, useState } from 'react';
-import UserCard from '../components/UserCard';
-import LoadingSpinner from '../components/LoadingSpinner';
-import layoutStyles from '../assets/css/Layout.module.css';
+import UserCard from './UserCard';
+import LoadingSpinner from '../common/LoadingSpinner';
+import layoutStyles from '../../assets/css/layout/Layout.module.css';
+
 
 const FriendsList = () => {
   const [friends, setFriends] = useState([]);

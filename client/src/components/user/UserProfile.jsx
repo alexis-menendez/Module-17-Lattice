@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import LoadingSpinner from '../components/LoadingSpinner';
-import layoutStyles from '../assets/css/Layout.module.css';
-import Auth from '../utils/auth';
-import { fetchUserProfileById, fetchMyProfile } from '../api/userAPI';
+import LoadingSpinner from '../common/LoadingSpinner';
+import layoutStyles from '../../assets/css/layout/Layout.module.css';
+import Auth from '../../utils/auth';
+import { fetchUserProfileById, fetchMyProfile } from '../../api/userAPI';
+
 
 const UserProfile = () => {
   const { userId } = useParams();

@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Auth from '../utils/auth';
-import styles from '../assets/css/NavBar.module.css'; 
+import Auth from '../../../utils/auth';
+import styles from '../../../assets/css/navigation/NavBar.module.css';
+
 
 const Navbar = () => {
   const navigate = useNavigate();

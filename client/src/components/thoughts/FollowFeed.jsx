@@ -2,11 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ThoughtCard from '../components/ThoughtCard';
-import LoadingSpinner from '../components/LoadingSpinner';
-import layoutStyles from '../assets/css/Layout.module.css';
-import Auth from '../utils/auth';
-import { fetchFollowingThoughts } from '../api/thoughtAPI'; 
+import ThoughtCard from './ThoughtCard';
+import LoadingSpinner from '../common/LoadingSpinner';
+import layoutStyles from '../../assets/css/layout/Layout.module.css';
+import Auth from '../../utils/auth';
+import { fetchFollowingThoughts } from '../../api/thoughtAPI';
+
 
 const FollowFeed = () => {
   const [thoughts, setThoughts] = useState([]);

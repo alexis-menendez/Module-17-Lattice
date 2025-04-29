@@ -1,11 +1,11 @@
 // Module-17-Lattice/client/src/components/thoughts/CreateThought.jsx
 
 import React, { useState } from 'react';
-import FormInput from '../components/FormInput';
-import FormTextarea from '../components/FormTextarea';
-import FormButton from '../components/FormButton';
-import ErrorMessage from '../components/ErrorMessage';
-import layoutStyles from '../assets/css/Layout.module.css';
+import FormInput from '../form/FormInput';
+import FormTextarea from '../form/FormTextarea';
+import FormButton from '../form/FormButton';
+import ErrorMessage from '../common/ErrorMessage';
+import layoutStyles from '../../assets/css/layout/Layout.module.css';
 
 const CreateThought = () => {
   const [formData, setFormData] = useState({
