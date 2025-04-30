@@ -36,3 +36,6 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
     return res.status(403).json({ message: 'Invalid or expired token' });
   }
 };
+
+// Second export with alternate name to test debug in userRoutes only
+export const authMiddleware = authenticateToken;

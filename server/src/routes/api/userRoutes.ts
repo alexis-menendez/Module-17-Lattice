@@ -16,24 +16,30 @@ import {
   updateMyProfile,
   uploadProfilePhoto
 } from '../../controllers/userController.js';
-
+import { authMiddleware } from '../../middleware/auth.js';
 import { authenticateToken } from '../../middleware/auth.js'; 
 
-// Routes for all users
+// Get / Create / Delete User
 router.route('/')
   .get(getUsers)
   .post(createUser);
+
+router.post('/', createUser);
+router.put('/:userId', updateUser);
+router.delete('/:userId', deleteUser);
 
 // Routes for the logged-in user's own profile
 router.route('/me')
   .get(authenticateToken, getMyProfile)
   .put(authenticateToken, updateMyProfile);
-
-// Upload profile photo
 router.route('/me/photo')
   .post(authenticateToken, uploadProfilePhoto);
 
-// ✅ Routes for single user access — all combined
+router.get('/me', authMiddleware, getMyProfile); 
+router.put('/me', authMiddleware, updateMyProfile);
+router.put('/me/photo', authMiddleware, uploadProfilePhoto);
+
+// Routes for single user access — all combined
 router.route('/:userId')
   .get(getSingleUser)
   .put(updateUser)
@@ -46,5 +52,9 @@ router.route('/:userId/friends')
 router.route('/:userId/friends/:friendId')
   .post(addFriend)
   .delete(removeFriend);
+
+router.get('/:userId/friends', getFriends);
+router.post('/:userId/friends/:friendId', addFriend);
+router.delete('/:userId/friends/:friendId', removeFriend);
 
 export default router;
