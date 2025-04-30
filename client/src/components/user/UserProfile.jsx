@@ -5,7 +5,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../common/LoadingSpinner';
 import layoutStyles from '../../assets/css/layout/Layout.module.css';
 import Auth from '../../utils/auth';
-import { retrieveUsers, fetchMyProfile } from '../../api/userAPI'; // ✅ Correct imports
+import { retrieveUsers, fetchMyProfile } from '../../api/userAPI';
 
 const UserProfile = () => {
   const { userId } = useParams();
@@ -29,9 +29,9 @@ const UserProfile = () => {
           }
           profileData = await fetchMyProfile();
         } else {
-          // No separate fetchUserProfileById yet — simulate by retrieving all users
           const users = await retrieveUsers();
-          profileData = users.find((u) => u._id === userId);
+          // Defensive string comparison
+          profileData = users.find((u) => String(u._id) === String(userId));
 
           if (!profileData) {
             throw new Error('User not found');
