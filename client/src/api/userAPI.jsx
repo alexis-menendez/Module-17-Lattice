@@ -7,10 +7,13 @@ const API_BASE_URL = '/api/users';
 // Retrieve all users
 const retrieveUsers = async () => {
   try {
+    const token = Auth.getToken();
+    console.log('[retrieveUsers] JWT token:', token); // ✅ Debug log
+
     const response = await fetch(`${API_BASE_URL}`, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${Auth.getToken()}`
+        Authorization: `Bearer ${token}`
       }
     });
 
@@ -27,13 +30,16 @@ const retrieveUsers = async () => {
   }
 };
 
-// 🆕 Retrieve the logged-in user's own profile
+// Retrieve the logged-in user's own profile
 const fetchMyProfile = async () => {
   try {
+    const token = Auth.getToken();
+    console.log('[fetchMyProfile] JWT token:', token); // ✅ Debug log
+
     const response = await fetch(`${API_BASE_URL}/me`, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${Auth.getToken()}`
+        Authorization: `Bearer ${token}`
       }
     });
 
