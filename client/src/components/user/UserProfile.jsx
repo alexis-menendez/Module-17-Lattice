@@ -15,6 +15,12 @@ const UserProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
+  // 🛡️ Synchronous early redirect to avoid async redirect pitfalls
+  if (userId === 'me' && !Auth.loggedIn()) {
+    navigate('/login');
+    return null;
+  }
+
   useEffect(() => {
     const loadProfile = async () => {
       try {
@@ -23,10 +29,6 @@ const UserProfile = () => {
         let profileData;
 
         if (userId === 'me') {
-          if (!Auth.loggedIn()) {
-            navigate('/login');
-            return;
-          }
           profileData = await fetchMyProfile();
         } else {
           const users = await retrieveUsers();
@@ -55,7 +57,7 @@ const UserProfile = () => {
     };
 
     loadProfile();
-  }, [userId, navigate]);
+  }, [userId]);
 
   if (isLoading) {
     return <LoadingSpinner />;

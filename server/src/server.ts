@@ -13,15 +13,17 @@ import express from 'express';
 import cors from 'cors'; 
 //import mongoose from 'mongoose';
 import db from './config/connection.js';
-import routes from './routes/index.js';
+
+// Explicit imports of route groups
+import routes from './routes/index.js';       
+import apiRoutes from './routes/index.js';       // Expects /api
+import authRoutes from './routes/auth-routes.js'; // Expects /auth
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// CORS middleware
-app.use(cors());
-
 // Middleware
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -29,8 +31,9 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "../../client/dist")));
 
 // API routes
-// app.use('/api', routes);
 app.use(routes);
+app.use('/api', apiRoutes);
+app.use('/auth', authRoutes);
 
 
 // Fallback route for React
