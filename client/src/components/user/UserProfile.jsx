@@ -32,11 +32,13 @@ const UserProfile = () => {
           profileData = await fetchMyProfile();
         } else {
           const users = await retrieveUsers();
-          // Defensive string comparison
+          console.log('[UserProfile] All users retrieved:', users); // ✅ Log users
+          
           profileData = users.find((u) => String(u._id) === String(userId));
 
           if (!profileData) {
-            throw new Error('User not found');
+            setError(`User with ID ${userId} not found`);
+            return; // ✅ Prevent further execution
           }
         }
 
