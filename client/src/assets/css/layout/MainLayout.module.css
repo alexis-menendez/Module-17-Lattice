@@ -20,15 +20,14 @@
   }
   
   .innerBackground {
-    background-image: url('/innerBackground.svg');
     background-repeat: no-repeat;
     background-position: top center;
     background-size: 100% auto;
     background-color: transparent;
   
-    width: 60.6667%; /* 2/3 width */
-    min-height: 170vh; /* 🔥 force inner container to match full viewport */
-    height: auto; /* grow beyond if needed */
+    width: 60.6667%; 
+    min-height: 170vh; 
+    height: auto; 
     padding: 2rem;
     background-position: center 170px;
     

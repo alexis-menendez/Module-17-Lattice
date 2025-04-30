@@ -1,6 +1,8 @@
 // Module-17-Lattice/server/src/seeds/user-seeds.ts
 
-export const users = [
+import bcrypt from 'bcrypt';
+
+export const users = await Promise.all([
   {
     username: "WhimsyWoods",
     email: "alexis.246.menendez@gmail.com",
@@ -121,4 +123,9 @@ export const users = [
       thoughts: [],
       friends: []
     }
-];
+    
+// Async function to hash passwords and return the result
+  ].map(async (user) => ({
+    ...user,
+    password: await bcrypt.hash(user.password, 10)
+  })));
