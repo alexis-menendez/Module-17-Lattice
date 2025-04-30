@@ -7,12 +7,12 @@ export interface IUser {
   username: string;
   email: string;
   password: string;
-  bio?: string;                
-  profilePhoto?: string;        
+  bio?: string;
+  profilePhoto?: string;
   thoughts: Types.ObjectId[];
   friends: Types.ObjectId[];
   following: Types.ObjectId[];
-  isDev?: boolean;  
+  isDev?: boolean;
 }
 
 // Mongoose document with full methods
@@ -42,10 +42,10 @@ const userSchema = new Schema<UserDocument>(
     },
     bio: {
       type: String,
-      maxlength: 160, //160 character limit for bio
+      maxlength: 160,
     },
     profilePhoto: {
-      type: String,   // URL to profile photo
+      type: String,
     },
     thoughts: [
       {
@@ -64,11 +64,16 @@ const userSchema = new Schema<UserDocument>(
         type: Schema.Types.ObjectId,
         ref: 'User',
       },
-    ], 
+    ],
   },
   {
     toJSON: {
       virtuals: true,
+      versionKey: false,
+      transform: (_doc, ret) => {
+        ret._id = ret._id.toString(); // Ensure _id is a string
+        delete ret.password;          // Hide password
+      },
     },
     id: false,
   }
