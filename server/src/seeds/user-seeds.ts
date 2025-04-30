@@ -2,12 +2,17 @@
 
 import bcrypt from 'bcrypt';
 
+const defaultProfilePhoto = 'https://res.cloudinary.com/demo/image/upload/v1714430000/default-profile.png'; // Replace with your own
+
 export const users = await Promise.all([
   {
     username: "WhimsyWoods",
     email: "alexis.246.menendez@gmail.com",
     password: "test123",
     isDev: true,
+    bio: "Explorer of mind and mycelium.",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
     thoughts: [],
     friends: []
   },
@@ -16,6 +21,9 @@ export const users = await Promise.all([
     email: "mycomama@latticefungi.com",
     password: "test123",
     isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
     thoughts: [],
     friends: []
   },
@@ -24,6 +32,9 @@ export const users = await Promise.all([
     email: "sporelore@latticefungi.com",
     password: "test123",
     isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
     thoughts: [],
     friends: []
   },
@@ -32,6 +43,9 @@ export const users = await Promise.all([
     email: "capcollector@latticefungi.com",
     password: "test123",
     isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
     thoughts: [],
     friends: []
   },
@@ -40,6 +54,9 @@ export const users = await Promise.all([
     email: "sporesprite@latticefungi.com",
     password: "test123",
     isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
     thoughts: [],
     friends: []
   },
@@ -48,6 +65,9 @@ export const users = await Promise.all([
     email: "mycomuse@latticefungi.com",
     password: "test123",
     isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
     thoughts: [],
     friends: []
   },
@@ -56,6 +76,9 @@ export const users = await Promise.all([
     email: "mossyminds@latticefungi.com",
     password: "test123",
     isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
     thoughts: [],
     friends: []
   },
@@ -64,6 +87,9 @@ export const users = await Promise.all([
     email: "gillsandthrills@latticefungi.com",
     password: "test123",
     isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
     thoughts: [],
     friends: []
   },
@@ -72,6 +98,9 @@ export const users = await Promise.all([
     email: "fungalfriend@latticefungi.com",
     password: "test123",
     isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
     thoughts: [],
     friends: []
   },
@@ -80,6 +109,9 @@ export const users = await Promise.all([
     email: "shroombloom@latticefungi.com",
     password: "test123",
     isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
     thoughts: [],
     friends: []
   },
@@ -88,44 +120,57 @@ export const users = await Promise.all([
     email: "lichenlover@latticefungi.com",
     password: "test123",
     isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
     thoughts: [],
     friends: []
   },
   {
-      username: "ForagerFox",
-      email: "foragerfox@latticefungi.com",
-      password: "test123",
-      isDev: false,
-      thoughts: [],
-      friends: []
-    },
-    {
-      username: "HiddenHyphae",
-      email: "hiddenhyphae@latticefungi.com",
-      password: "test123",
-      isDev: false,
-      thoughts: [],
-      friends: []
-    },
-    {
-      username: "TruffleTroubadour",
-      email: "truffletroubadour@latticefungi.com",
-      password: "test123",
-      isDev: false,
-      thoughts: [],
-      friends: []
-    },
-    {
-      username: "PuffballPal",
-      email: "puffballpal@latticefungi.com",
-      password: "test123",
-      isDev: false,
-      thoughts: [],
-      friends: []
-    }
-    
-// Async function to hash passwords and return the result
-  ].map(async (user) => ({
-    ...user,
-    password: await bcrypt.hash(user.password, 10)
-  })));
+    username: "ForagerFox",
+    email: "foragerfox@latticefungi.com",
+    password: "test123",
+    isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
+    thoughts: [],
+    friends: []
+  },
+  {
+    username: "HiddenHyphae",
+    email: "hiddenhyphae@latticefungi.com",
+    password: "test123",
+    isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
+    thoughts: [],
+    friends: []
+  },
+  {
+    username: "TruffleTroubadour",
+    email: "truffletroubadour@latticefungi.com",
+    password: "test123",
+    isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
+    thoughts: [],
+    friends: []
+  },
+  {
+    username: "PuffballPal",
+    email: "puffballpal@latticefungi.com",
+    password: "test123",
+    isDev: false,
+    bio: "",
+    profilePhoto: defaultProfilePhoto,
+    following: [],
+    thoughts: [],
+    friends: []
+  }
+].map(async (user) => ({
+  ...user,
+  password: await bcrypt.hash(user.password, 10)
+})));
