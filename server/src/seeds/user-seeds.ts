@@ -11,7 +11,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: true,
     bio: "Explorer of mind and mycelium.",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -22,7 +22,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -33,7 +33,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -44,7 +44,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -55,7 +55,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -66,7 +66,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -77,7 +77,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -88,7 +88,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -99,7 +99,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -110,7 +110,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -121,7 +121,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -132,7 +132,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -143,7 +143,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -154,7 +154,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
@@ -165,7 +165,7 @@ export const users = await Promise.all([
     password: "test123",
     isDev: false,
     bio: "",
-    profilePhoto: defaultProfilePhoto,
+    profilePhoto: "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     following: [],
     thoughts: [],
     friends: []
