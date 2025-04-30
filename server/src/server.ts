@@ -15,9 +15,11 @@ import cors from 'cors';
 import db from './config/connection.js';
 
 // Explicit imports of route groups
-import routes from './routes/index.js';       
-import apiRoutes from './routes/index.js';       // Expects /api
-import authRoutes from './routes/auth-routes.js'; // Expects /auth
+import routes from './routes/index.js'; 
+import authRoutes from './routes/auth-routes.js';       
+import apiRoutes from './routes/index.js';       
+import userRoutes from './routes/api/userRoutes.js';
+import thoughtRoutes from './routes/api/thoughtRoutes.js';
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -32,8 +34,11 @@ app.use(express.static(path.resolve(__dirname, "../../client/dist")));
 
 // API routes
 app.use(routes);
-app.use('/api', apiRoutes);
 app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/thoughts', thoughtRoutes);
+
 
 
 // Fallback route for React
