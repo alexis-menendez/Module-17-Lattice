@@ -2,7 +2,8 @@
 
 ```md
 ⚠️ Work In Progress
-This project is currently under active development and is not yet complete. Expect bugs, missing features, and unpolished UI while construction is underway.
+This project is currently under active development and is not yet complete.
+Expect bugs, missing features, and unpolished UI while construction is underway.
 ```
 
 ## **Description**
