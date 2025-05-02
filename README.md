@@ -44,7 +44,7 @@ Users will be able to:
 
 Per the requirements for this assignment, I've included the link to a video of me testing some of the API calls in [Insomnia](https://insomnia.rest/):
 
-[Link to Insomnia Tests Video](https://drive.google.com/drive/folders/1-Ff98yyt8dmNVp-lFOMCcmoHGFwO9LqH?dmr=1&ec=wgc-drive-hero-goto)
+[Link to Insomnia Tests Video](https://drive.google.com/file/d/1SYEayFSCsxGDi4sRtNhyog7B0gYXw0TU/view?usp=sharing)
 
 ---
 
