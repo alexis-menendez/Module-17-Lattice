@@ -22,12 +22,15 @@ const UserProfile = () => {
   }
 
   useEffect(() => {
+    console.log('UserProfile component mounted'); // ✅ Log when the component mounts
     const loadProfile = async () => {
       try {
         setIsLoading(true);
 
         let profileData;
-
+        
+        console.log('userID:', userId); // ✅ Log userId
+        
         if (userId === 'me') {
           profileData = await fetchMyProfile();
         } else {

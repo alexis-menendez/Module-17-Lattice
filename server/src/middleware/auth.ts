@@ -2,6 +2,9 @@
 
 import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload as DefaultJwtPayload } from 'jsonwebtoken';
+import User from '../models/User.js'; // Required in ESM
+
+
 
 interface CustomJwtPayload extends DefaultJwtPayload {
   _id: string;
@@ -10,11 +13,11 @@ interface CustomJwtPayload extends DefaultJwtPayload {
 
 declare module 'express-serve-static-core' {
   interface Request {
-    user?: CustomJwtPayload;
+    user?: any; // Replace `any` with a Mongoose User type???
   }
 }
 
-export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
+export const authenticateToken = async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
@@ -30,12 +33,18 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
 
   try {
     const decoded = jwt.verify(token, secretKey) as CustomJwtPayload;
-    req.user = decoded;
-    return next();  
+    
+    const user = await User.findById(decoded._id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    req.user = user; 
+    return next();
   } catch (err) {
+    console.error('[authMiddleware] Token error:', err);
     return res.status(403).json({ message: 'Invalid or expired token' });
   }
 };
 
-// Second export with alternate name to test debug in userRoutes only
 export const authMiddleware = authenticateToken;
