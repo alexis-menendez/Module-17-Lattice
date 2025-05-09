@@ -36,7 +36,7 @@
   }
   
   .navLink:hover {
-    color: #d1d5db; /* Tailwind gray-300 */
+    color: #d1d5db; 
   }
   
   .logoutButton {
@@ -51,6 +51,6 @@
   }
   
   .logoutButton:hover {
-    background-color: #b91c1c; /* darker red */
+    background-color: #b91c1c; 
   }
   

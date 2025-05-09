@@ -8,7 +8,7 @@ const API_BASE_URL = '/api/users';
 const retrieveUsers = async () => {
   try {
     const token = Auth.getToken();
-    console.log('[retrieveUsers] JWT token:', token); // ✅ Debug log
+    console.log('[retrieveUsers] JWT token:', token); 
 
     const response = await fetch(`${API_BASE_URL}`, {
       headers: {
@@ -34,7 +34,7 @@ const retrieveUsers = async () => {
 const fetchMyProfile = async () => {
   try {
     const token = Auth.getToken();
-    console.log('[fetchMyProfile] JWT token:', token); // ✅ Debug log
+    console.log('[fetchMyProfile] JWT token:', token); 
 
     const response = await fetch(`${API_BASE_URL}/me`, {
       headers: {

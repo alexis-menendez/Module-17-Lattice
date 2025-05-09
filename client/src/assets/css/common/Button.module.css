@@ -27,7 +27,7 @@
   }
   
   .secondaryButton:hover {
-    background-color: #059669; /* slightly darker green */
+    background-color: #059669;
   }
   
   .dangerButton {
@@ -42,12 +42,12 @@
   }
   
   .dangerButton:hover {
-    background-color: #b91c1c; /* darker red */
+    background-color: #b91c1c; 
   }
   
   .disabledButton {
-    background-color: #d1d5db; /* Tailwind gray-300 */
-    color: #9ca3af; /* Tailwind gray-400 */
+    background-color: #d1d5db; 
+    color: #9ca3af; 
     cursor: not-allowed;
     opacity: 0.7;
   }

@@ -66,7 +66,7 @@ const thoughtSchema = new Schema<IThought>(
       type: String,
       enum: ['public', 'private'],
       default: 'public', // default to public
-    }, // NEW
+    }, 
   },
   {
     toJSON: {

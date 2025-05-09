@@ -1,6 +1,5 @@
 // Module-17-Lattice/client/src/api/authAPI.jsx
 
-// Automatically use the right API base URL depending on environment
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 const login = async (userInfo) => {

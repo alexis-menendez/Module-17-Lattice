@@ -71,8 +71,8 @@ const userSchema = new Schema<UserDocument>(
       virtuals: true,
       versionKey: false,
       transform: (_doc, ret) => {
-        ret._id = ret._id.toString(); // Ensure _id is a string
-        delete ret.password;          // Hide password
+        ret._id = ret._id.toString(); 
+        delete ret.password;          
       },
     },
     id: false,

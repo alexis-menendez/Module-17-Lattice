@@ -8,7 +8,7 @@
     background-color: #000;
   
     width: 100%;
-    min-height: 170vh; /* always at least full screen */
+    min-height: 170vh; 
     height: auto;
     background-position: center 20px;
 

@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ES2020"],
+    "jsx": "react-jsx",
+
+    /* Modules */
+    "moduleResolution": "Node",
+    "baseUrl": "./src",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    /* Project Structure */
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "strict": true,
+
+    /* Additional useful options (optional) */
+    "noEmit": true,
+    "isolatedModules": true
+  },
+  "include": ["src", "src/types"],
+  "exclude": ["node_modules", "dist"]
+}
