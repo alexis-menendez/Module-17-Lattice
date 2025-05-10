@@ -18,11 +18,11 @@ Module-17-Lattice/
 │   │    
 │   ├── src/   
 │   │    ├── api/  
-│   │    |    ├── authAPI.jsx  
+│   │    |    ├── authAPI.ts  
 │   │    |    |   
-│   │    |    ├── thoughtAPI.jsx  
+│   │    |    ├── thoughtAPI.ts 
 │   │    |    |   
-│   │    |    └── userAPI.jsx   
+│   │    |    └── userAPI.ts   
 │   │    |   
 │   │    ├── assets/  
 │   │    |    ├── react.svg  
@@ -51,89 +51,91 @@ Module-17-Lattice/
 │   │    |   
 │   │    ├── components/  
 │   │    |    ├── common/
-│   │    |    |    ├── ErrorMessage.jsx   
+│   │    |    |    ├── ErrorMessage.tsx   
 │   │    |    |    |  
-│   │    |    |    ├── LoadingSpinner.jsx  
+│   │    |    |    ├── LoadingSpinner.tsx  
 │   │    |    |    |  
-│   │    |    |    └── Modal.jsx   
+│   │    |    |    └── Modal.tsx   
 │   │    |    |  
 │   │    |    ├── form/ 
-│   │    |    |    ├── FormButton.jsx   
+│   │    |    |    ├── FormButton.tsx   
 │   │    |    |    |  
-│   │    |    |    ├── FormInput.jsx  
+│   │    |    |    ├── FormInput.tsx  
 │   │    |    |    |  
-│   │    |    |    └── FormTextarea.jsx  
+│   │    |    |    └── FormTextarea.tsx  
 │   │    |    |  
 │   │    |    ├── layout/ 
-│   │    |    |    ├── MainLayout.jsx  
+│   │    |    |    ├── MainLayout.tsx  
 │   │    |    |    |  
-│   │    |    |    ├── PageWrapper.jsx  
+│   │    |    |    ├── PageWrapper.tsx  
 │   │    |    |    |  
-│   │    |    |    └── ProtectedRoute.jsx  
+│   │    |    |    └── ProtectedRoute.tsx  
 │   │    |    |  
 │   │    |    ├── navigation/ 
-│   │    |    |    └── NavBar.jsx  
+│   │    |    |    └── NavBar.tsx  
 │   │    |    |  
 │   │    |    ├── thoughts/  
-│   │    |    |    ├── AllThoughts.jsx  
+│   │    |    |    ├── AllThoughts.tsx  
 │   │    |    |    |  
-│   │    |    |    ├── CreateThought.jsx  
+│   │    |    |    ├── CreateThought.tsx  
 │   │    |    |    |  
-│   │    |    |    ├── EditThought.jsx  
+│   │    |    |    ├── EditThought.tsx  
 │   │    |    |    |  
-│   │    |    |    ├── FollowFeed.jsx  
+│   │    |    |    ├── FollowFeed.tsx  
 │   │    |    |    |  
-│   │    |    |    ├── FriendFeed.jsx  
+│   │    |    |    ├── FriendFeed.tsx  
 │   │    |    |    |  
-│   │    |    |    ├── PublicFeed.jsx  
+│   │    |    |    ├── PublicFeed.tsx  
 │   │    |    |    |  
-│   │    |    |    ├── ReactionList.jsx  
+│   │    |    |    ├── ReactionList.tsx  
 │   │    |    |    |  
-│   │    |    |    ├── SingleThought.jsx  
+│   │    |    |    ├── SingleThought.tsx  
 │   │    |    |    |  
-│   │    |    |    └── ThoughtCard.jsx  
+│   │    |    |    └── ThoughtCard.tsx  
 │   │    |    |   
 │   │    |    └── user/ 
-│   │    |         ├── FriendsList.jsx  
+│   │    |         ├── FriendsList.tsx  
 │   │    |         |  
-│   │    |         ├── MyPosts.jsx  
+│   │    |         ├── MyPosts.tsx  
 │   │    |         |  
-│   │    |         ├── UserCard.jsx  
+│   │    |         ├── UserCard.tsx  
 │   │    |         | 
-│   │    |         └── UserProfile.jsx  
+│   │    |         └── UserProfile.tsx  
 │   │    |   
 │   │    ├── interfaces/  
-│   │    |    ├── ApiMessages.jsx  
+│   │    |    ├── ApiMessages.tsx  
 │   │    |    |   
-│   │    |    ├── ThoughtData.jsx  
+│   │    |    ├── ThoughtData.tsx  
 │   │    |    |   
-│   │    |    ├── UserData.jsx  
+│   │    |    ├── UserData.tsx  
 │   │    |    |   
-│   │    |    └── UserLogin.jsx  
+│   │    |    └── UserLogin.tsx  
 │   │    |   
 │   │    ├── pages/  
-│   │    |    ├── Dashboard.jsx  
+│   │    |    ├── Dashboard.tsx  
 │   │    |    |   
-│   │    |    ├── Home.jsx  
+│   │    |    ├── Home.tsx  
 │   │    |    |   
-│   │    |    ├── Login.jsx  
+│   │    |    ├── Login.tsx  
 │   │    |    |   
-│   │    |    ├── NotFound.jsx  
+│   │    |    ├── NotFound.tsx  
 │   │    |    |     
-│   │    |    └── SignUp.jsx  
+│   │    |    └── SignUp.tsx  
 │   │    |   
 │   │    ├── utils/   
-│   │    │    ├── auth.js  
+│   │    │    ├── auth.ts  
 │   │    |    |   
-│   │    │    ├── errorHandler.js  
+│   │    │    ├── errorHandler.ts  
 │   │    |    |   
-│   │    │    └── formatDate.js  
+│   │    │    └── formatDate.ts  
 │   │    |   
-│   │    ├── App.jsx   
+│   │    ├── App.tsx   
 │   │    |   
 │   │    ├── index.css  
 │   │    |   
-│   │    └── main.jsx  
+│   │    ├── main.tsx  
+│   │    |   
+│   │    └── vite-env.d.ts  
 │   │     
 │   │      
 │   ├── node_modules/   
@@ -149,13 +151,11 @@ Module-17-Lattice/
 │   │      
 │   ├── package-lock.json  
 │   │      
-│   ├── postcss.config.js  
+│   ├── postcss.config.ts  
 │   │      
-│   ├── tailwind.config.js  
+│   ├── tailwind.config.ts  
 │   │      
 │   ├── tsconfig.json  
-│   │      
-│   ├── tsconfig.node.json  
 │   │      
 │   ├── vite.config.js   
 │   │      

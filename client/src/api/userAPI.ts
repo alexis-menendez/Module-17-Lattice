@@ -1,14 +1,26 @@
-// Module-17-Lattice/client/src/api/userAPI.jsx
+// Module-17-Lattice/client/src/api/userAPI.ts
 
 import Auth from '../utils/auth';
 
 const API_BASE_URL = '/api/users';
 
+export interface UserProfile {
+  _id: string;
+  username: string;
+  email?: string;
+  bio?: string;
+  profilePhoto?: string;
+  thoughts?: string[];
+  friends?: string[];
+  following?: string[];
+  isDev?: boolean;
+}
+
 // Retrieve all users
-const retrieveUsers = async () => {
+const retrieveUsers = async (): Promise<UserProfile[]> => {
   try {
     const token = Auth.getToken();
-    console.log('[retrieveUsers] JWT token:', token); 
+    console.log('[retrieveUsers] JWT token:', token);
 
     const response = await fetch(`${API_BASE_URL}`, {
       headers: {
@@ -24,17 +36,17 @@ const retrieveUsers = async () => {
     }
 
     return data;
-  } catch (err) {
+  } catch (err: any) {
     console.error('Error retrieving users:', err);
     return Promise.reject(err.message || 'Could not fetch users');
   }
 };
 
 // Retrieve the logged-in user's own profile
-const fetchMyProfile = async () => {
+const fetchMyProfile = async (): Promise<UserProfile> => {
   try {
     const token = Auth.getToken();
-    console.log('[fetchMyProfile] JWT token:', token); 
+    console.log('[fetchMyProfile] JWT token:', token);
 
     const response = await fetch(`${API_BASE_URL}/me`, {
       headers: {
@@ -50,7 +62,7 @@ const fetchMyProfile = async () => {
     }
 
     return data;
-  } catch (err) {
+  } catch (err: any) {
     console.error('Error fetching your profile:', err);
     return Promise.reject(err.message || 'Could not fetch your profile');
   }

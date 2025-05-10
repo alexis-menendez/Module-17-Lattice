@@ -1,6 +1,6 @@
 // Module-17-Lattice/server/src/routes/index.ts
 
-import { Router } from 'express';
+import { Router, type RequestHandler } from 'express';
 
 import authRoutes from './auth-routes.js';
 import { authenticateToken } from '../middleware/auth.js';
@@ -14,12 +14,11 @@ const router = Router();
 router.use('/api', authenticateToken, apiRoutes);
 router.use('/auth', authRoutes);
 
-// router.use('/users', userRoutes);       
-// router.use('/thoughts', thoughtRoutes);
-
-
-router.use((_req, res) => {
-  return res.send('404 Not Found: The requested resource does not exist.');
-});
+// Type-safe 404 handler
+const notFoundHandler: RequestHandler = (_req, res): void => {
+  res.status(404).send('404 Not Found: The requested resource does not exist.');
+};
+// router.use('*', notFoundHandler);
+router.all('*', notFoundHandler);
 
 export default router;

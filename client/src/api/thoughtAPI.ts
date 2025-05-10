@@ -1,11 +1,25 @@
-// Module-17-Lattice/client/src/api/thoughtAPI.jsx
+// Module-17-Lattice/client/src/api/thoughtAPI.ts
 
-import Auth from '../utils/auth'; 
+import Auth from '../utils/auth';
 
 const API_BASE_URL = '/api/thoughts';
 
-// Retrieve all thoughts (general)
-const retrieveThoughts = async () => {
+export interface ThoughtPayload {
+  thoughtText: string;
+  visibility?: 'public' | 'private';
+}
+
+export interface ThoughtResponse {
+  _id: string;
+  thoughtText: string;
+  username: string;
+  createdAt: string;
+  visibility: string;
+  reactions?: any[];
+}
+
+// Retrieve all thoughts
+const retrieveThoughts = async (): Promise<ThoughtResponse[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}`, {
       headers: {
@@ -15,11 +29,7 @@ const retrieveThoughts = async () => {
     });
 
     const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || 'Failed to fetch thoughts');
-    }
-
+    if (!response.ok) throw new Error(data.message || 'Failed to fetch thoughts');
     return data;
   } catch (err) {
     console.error('Error retrieving thoughts:', err);
@@ -27,8 +37,7 @@ const retrieveThoughts = async () => {
   }
 };
 
-// Retrieve a single thought by ID
-const retrieveThought = async (id) => {
+const retrieveThought = async (id: string): Promise<ThoughtResponse> => {
   try {
     const response = await fetch(`${API_BASE_URL}/${id}`, {
       headers: {
@@ -38,11 +47,7 @@ const retrieveThought = async (id) => {
     });
 
     const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || 'Failed to fetch thought');
-    }
-
+    if (!response.ok) throw new Error(data.message || 'Failed to fetch thought');
     return data;
   } catch (err) {
     console.error('Error retrieving thought:', err);
@@ -50,8 +55,7 @@ const retrieveThought = async (id) => {
   }
 };
 
-// Create a new thought
-const createThought = async (body) => {
+const createThought = async (body: ThoughtPayload): Promise<ThoughtResponse> => {
   try {
     const response = await fetch(`${API_BASE_URL}`, {
       method: 'POST',
@@ -63,11 +67,7 @@ const createThought = async (body) => {
     });
 
     const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || 'Failed to create thought');
-    }
-
+    if (!response.ok) throw new Error(data.message || 'Failed to create thought');
     return data;
   } catch (err) {
     console.error('Error creating thought:', err);
@@ -75,11 +75,10 @@ const createThought = async (body) => {
   }
 };
 
-// Update an existing thought
-const updateThought = async (thoughtId, body) => {
+const updateThought = async (thoughtId: string, body: Partial<ThoughtPayload>): Promise<ThoughtResponse> => {
   try {
     const response = await fetch(`${API_BASE_URL}/${thoughtId}`, {
-      method: 'PATCH', // Use PATCH for partial updates
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${Auth.getToken()}`
@@ -88,11 +87,7 @@ const updateThought = async (thoughtId, body) => {
     });
 
     const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || 'Failed to update thought');
-    }
-
+    if (!response.ok) throw new Error(data.message || 'Failed to update thought');
     return data;
   } catch (err) {
     console.error('Error updating thought:', err);
@@ -100,8 +95,7 @@ const updateThought = async (thoughtId, body) => {
   }
 };
 
-// Delete a thought
-const deleteThought = async (thoughtId) => {
+const deleteThought = async (thoughtId: string): Promise<{ message: string }> => {
   try {
     const response = await fetch(`${API_BASE_URL}/${thoughtId}`, {
       method: 'DELETE',
@@ -112,11 +106,7 @@ const deleteThought = async (thoughtId) => {
     });
 
     const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || 'Failed to delete thought');
-    }
-
+    if (!response.ok) throw new Error(data.message || 'Failed to delete thought');
     return data;
   } catch (err) {
     console.error('Error deleting thought:', err);
@@ -124,8 +114,7 @@ const deleteThought = async (thoughtId) => {
   }
 };
 
-// Retrieve logged-in user's own thoughts
-const fetchMyThoughts = async () => {
+const fetchMyThoughts = async (): Promise<ThoughtResponse[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/mine`, {
       headers: {
@@ -135,11 +124,7 @@ const fetchMyThoughts = async () => {
     });
 
     const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || 'Failed to fetch your thoughts');
-    }
-
+    if (!response.ok) throw new Error(data.message || 'Failed to fetch your thoughts');
     return data;
   } catch (err) {
     console.error('Error fetching your thoughts:', err);
@@ -147,8 +132,7 @@ const fetchMyThoughts = async () => {
   }
 };
 
-// Retrieve friends' thoughts
-const fetchFriendsThoughts = async () => {
+const fetchFriendsThoughts = async (): Promise<ThoughtResponse[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/friends`, {
       headers: {
@@ -158,11 +142,7 @@ const fetchFriendsThoughts = async () => {
     });
 
     const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || 'Failed to fetch friends\' thoughts');
-    }
-
+    if (!response.ok) throw new Error(data.message || 'Failed to fetch friends\' thoughts');
     return data;
   } catch (err) {
     console.error('Error fetching friends\' thoughts:', err);
@@ -170,8 +150,7 @@ const fetchFriendsThoughts = async () => {
   }
 };
 
-// Retrieve following thoughts
-const fetchFollowingThoughts = async () => {
+const fetchFollowingThoughts = async (): Promise<ThoughtResponse[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/following`, {
       headers: {
@@ -181,11 +160,7 @@ const fetchFollowingThoughts = async () => {
     });
 
     const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || 'Failed to fetch following thoughts');
-    }
-
+    if (!response.ok) throw new Error(data.message || 'Failed to fetch following thoughts');
     return data;
   } catch (err) {
     console.error('Error fetching following thoughts:', err);
@@ -193,8 +168,7 @@ const fetchFollowingThoughts = async () => {
   }
 };
 
-// Retrieve public thoughts
-const fetchPublicThoughts = async () => {
+const fetchPublicThoughts = async (): Promise<ThoughtResponse[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/public`, {
       headers: {
@@ -203,11 +177,7 @@ const fetchPublicThoughts = async () => {
     });
 
     const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || 'Failed to fetch public thoughts');
-    }
-
+    if (!response.ok) throw new Error(data.message || 'Failed to fetch public thoughts');
     return data;
   } catch (err) {
     console.error('Error fetching public thoughts:', err);
@@ -215,7 +185,7 @@ const fetchPublicThoughts = async () => {
   }
 };
 
-export { 
+export {
   createThought,
   deleteThought,
   retrieveThoughts,
