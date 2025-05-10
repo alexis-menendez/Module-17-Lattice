@@ -1,24 +1,36 @@
-// Module-17-Lattice/server/src/routes/index.ts
-
-import { Router, type RequestHandler } from 'express';
+import { Router } from 'express';
 
 import authRoutes from './auth-routes.js';
-import { authenticateToken } from '../middleware/auth.js';
-
 import apiRoutes from './api/index.js';
-// import userRoutes from './api/userRoutes.js';
-// import thoughtRoutes from './api/thoughtRoutes.js';
 
 const router = Router();
 
-router.use('/api', authenticateToken, apiRoutes);
-router.use('/auth', authRoutes);
+console.log('[router] initializing main route index');
 
-// Type-safe 404 handler
-const notFoundHandler: RequestHandler = (_req, res): void => {
-  res.status(404).send('404 Not Found: The requested resource does not exist.');
-};
-// router.use('*', notFoundHandler);
-router.all('*', notFoundHandler);
+try {
+  console.log('[router] mounting /api with authenticateToken');
+  router.use('/api', apiRoutes);
+} catch (err) {
+  console.error('[router] FAILED to mount /api:', err);
+  throw err;
+}
+
+try {
+  console.log('[router] mounting /auth');
+  router.use('/auth', authRoutes);
+} catch (err) {
+  console.error('[router] FAILED to mount /auth:', err);
+  throw err;
+}
+
+try {
+  console.log('[router] mounting fallback 404 handler');
+  router.all('*', (_req, res) => {
+    res.status(404).json({ message: '404 Not Found: The requested resource does not exist.' });
+  });
+} catch (err) {
+  console.error('[router] FAILED to mount 404 handler:', err);
+  throw err;
+}
 
 export default router;

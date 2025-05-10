@@ -3,58 +3,75 @@
 import { Router } from 'express';
 const router = Router();
 
-import { 
+import {
   getUsers,
-  getSingleUser,   
-  createUser, 
+  getSingleUser,
+  createUser,
   updateUser,
-  deleteUser,  
-  addFriend,   
-  removeFriend,   
+  deleteUser,
+  addFriend,
+  removeFriend,
   getFriends,
   getMyProfile,
   updateMyProfile,
   uploadProfilePhoto
 } from '../../controllers/userController.js';
+
 import { authMiddleware } from '../../middleware/auth.js';
-import { authenticateToken } from '../../middleware/auth.js'; 
 
-// Get / Create / Delete User
-router.route('/')
-  .get(getUsers)
-  .post(createUser);
+console.log('[router] mounting userRoutes');
 
-router.post('/', createUser);
-router.put('/:userId', updateUser);
-router.delete('/:userId', deleteUser);
+try {
+  console.log('mounting: /');
+  router.route('/')
+    .get(getUsers)
+    .post(createUser);
+} catch (err) {
+  console.error('FAILED to mount /', err);
+}
 
-// Routes for the logged-in user's own profile
-router.route('/me')
-  .get(authenticateToken, getMyProfile)
-  .put(authenticateToken, updateMyProfile);
-router.route('/me/photo')
-  .post(authenticateToken, uploadProfilePhoto);
+try {
+  console.log('mounting: /:userId');
+  router.route('/:userId')
+    .get(getSingleUser)
+    .put(updateUser)
+    .delete(deleteUser);
+} catch (err) {
+  console.error('FAILED to mount /:userId', err);
+}
 
-router.get('/me', authMiddleware, getMyProfile); 
-router.put('/me', authMiddleware, updateMyProfile);
-router.put('/me/photo', authMiddleware, uploadProfilePhoto);
+try {
+  console.log('mounting: /me (auth)');
+  router.route('/me')
+    .get(authMiddleware, getMyProfile)
+    .put(authMiddleware, updateMyProfile);
+} catch (err) {
+  console.error('FAILED to mount /me', err);
+}
 
-// Routes for single user access — all combined
-router.route('/:userId')
-  .get(getSingleUser)
-  .put(updateUser)
-  .delete(deleteUser);
+try {
+  console.log('mounting: /me/photo (auth)');
+  router.route('/me/photo')
+    .post(authMiddleware, uploadProfilePhoto);
+} catch (err) {
+  console.error('FAILED to mount /me/photo', err);
+}
 
-// Routes for user's friends
-router.route('/:userId/friends')
-  .get(getFriends);
+try {
+  console.log('mounting: /:userId/friends');
+  router.route('/:userId/friends')
+    .get(getFriends);
+} catch (err) {
+  console.error('FAILED to mount /:userId/friends', err);
+}
 
-router.route('/:userId/friends/:friendId')
-  .post(addFriend)
-  .delete(removeFriend);
-
-router.get('/:userId/friends', getFriends);
-router.post('/:userId/friends/:friendId', addFriend);
-router.delete('/:userId/friends/:friendId', removeFriend);
+try {
+  console.log('mounting: /:userId/friends/:friendId');
+  router.route('/:userId/friends/:friendId')
+    .post(addFriend)
+    .delete(removeFriend);
+} catch (err) {
+  console.error('FAILED to mount /:userId/friends/:friendId', err);
+}
 
 export default router;

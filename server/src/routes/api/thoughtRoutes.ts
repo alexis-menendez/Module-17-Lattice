@@ -3,13 +3,13 @@
 import { Router } from 'express';
 const router = Router();
 
-import { 
-  getThoughts, 
-  getSingleThought, 
-  createThought, 
-  updateThought, 
-  deleteThought, 
-  addReaction, 
+import {
+  getThoughts,
+  getSingleThought,
+  createThought,
+  updateThought,
+  deleteThought,
+  addReaction,
   removeReaction,
   getMyThoughts,
   getFriendsThoughts,
@@ -17,38 +17,75 @@ import {
   getPublicThoughts
 } from '../../controllers/thoughtController.js';
 
-import { authenticateToken } from '../../middleware/auth.js'; 
+import { authenticateToken } from '../../middleware/auth.js';
 
-// General Thought Routes
-router.route('/')
-      .get(getThoughts)
-      .post(createThought);
+console.log('[router] mounting thoughtRoutes');
 
-router.route('/:thoughtId')
-      .get(getSingleThought)
-      .put(updateThought)
-      .delete(deleteThought);
+try {
+  console.log('mounting: /');
+  router.route('/')
+    .get(getThoughts)
+    .post(createThought);
+} catch (err) {
+  console.error('FAILED to mount /', err);
+}
 
-router.route('/:thoughtId/reactions')
-      .post(addReaction);
+try {
+  console.log('mounting: /:thoughtId');
+  router.route('/:thoughtId')
+    .get(getSingleThought)
+    .put(updateThought)
+    .delete(deleteThought);
+} catch (err) {
+  console.error('FAILED to mount /:thoughtId', err);
+}
 
-router.route('/:thoughtId/reactions/:reactionId')
-      .delete(removeReaction);
+try {
+  console.log('mounting: /:thoughtId/reactions');
+  router.route('/:thoughtId/reactions')
+    .post(addReaction);
+} catch (err) {
+  console.error('FAILED to mount /:thoughtId/reactions', err);
+}
 
-// User Thoughts Feed Routes
-router.route('/mine')
-      .get(authenticateToken, getMyThoughts);
+try {
+  console.log('mounting: /:thoughtId/reactions/:reactionId');
+  router.route('/:thoughtId/reactions/:reactionId')
+    .delete(removeReaction);
+} catch (err) {
+  console.error('FAILED to mount /:thoughtId/reactions/:reactionId', err);
+}
 
-// User Friends Thoughts Feed Routes
-router.route('/friends')
-      .get(authenticateToken, getFriendsThoughts);
+try {
+  console.log('mounting: /mine');
+  router.route('/mine')
+    .get(authenticateToken, getMyThoughts);
+} catch (err) {
+  console.error('FAILED to mount /mine', err);
+}
 
-// User Following Public Thoughts Feed Routes
-router.route('/following')
-      .get(authenticateToken, getFollowingThoughts);
+try {
+  console.log('mounting: /friends');
+  router.route('/friends')
+    .get(authenticateToken, getFriendsThoughts);
+} catch (err) {
+  console.error('FAILED to mount /friends', err);
+}
 
-// All Public Thoughts Feed Routes
-router.route('/public')
-      .get(getPublicThoughts);
+try {
+  console.log('mounting: /following');
+  router.route('/following')
+    .get(authenticateToken, getFollowingThoughts);
+} catch (err) {
+  console.error('FAILED to mount /following', err);
+}
+
+try {
+  console.log('mounting: /public');
+  router.route('/public')
+    .get(getPublicThoughts);
+} catch (err) {
+  console.error('FAILED to mount /public', err);
+}
 
 export default router;
