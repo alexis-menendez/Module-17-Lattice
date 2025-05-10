@@ -4,9 +4,10 @@
     "email": "alexis.246.menendez@gmail.com",
     "password": "test123",
     "isDev": true,
-    "bio": "",
+    "bio": "Explorer of mind and mycelium.",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
   },
@@ -18,6 +19,7 @@
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
   },
@@ -29,6 +31,7 @@
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
   },
@@ -40,6 +43,7 @@
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
   },
@@ -51,118 +55,128 @@
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
   },
-    {
-      "username": "MycoMuse",
-      "email": "mycomuse@latticefungi.com",
-      "password": "test123",
-      "isDev": false,
+  {
+    "username": "MycoMuse",
+    "email": "mycomuse@latticefungi.com",
+    "password": "test123",
+    "isDev": false,
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
-    },
-    {
-      "username": "MossyMinds",
-      "email": "mossyminds@latticefungi.com",
-      "password": "test123",
-      "isDev": false,
+  },
+  {
+    "username": "MossyMinds",
+    "email": "mossyminds@latticefungi.com",
+    "password": "test123",
+    "isDev": false,
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
-    },
-    {
-      "username": "GillsAndThrills",
-      "email": "gillsandthrills@latticefungi.com",
-      "password": "test123",
-      "isDev": false,
+  },
+  {
+    "username": "GillsAndThrills",
+    "email": "gillsandthrills@latticefungi.com",
+    "password": "test123",
+    "isDev": false,
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
-    },
-    {
-      "username": "FungalFriend",
-      "email": "fungalfriend@latticefungi.com",
-      "password": "test123",
-      "isDev": false,
+  },
+  {
+    "username": "FungalFriend",
+    "email": "fungalfriend@latticefungi.com",
+    "password": "test123",
+    "isDev": false,
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
-    },
-    {
-     "username": "ShroomBloom",
-      "email": "shroombloom@latticefungi.com",
-      "password": "test123",
-      "isDev": false,
+  },
+  {
+    "username": "ShroomBloom",
+    "email": "shroombloom@latticefungi.com",
+    "password": "test123",
+    "isDev": false,
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
-    },
-    {
-      "username": "LichenLover",
-      "email": "lichenlover@latticefungi.com",
-      "password": "test123",
-      "isDev": false,
+  },
+  {
+    "username": "LichenLover",
+    "email": "lichenlover@latticefungi.com",
+    "password": "test123",
+    "isDev": false,
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
-    },
-    {
-        "username": "ForagerFox",
-        "email": "foragerfox@latticefungi.com",
-        "password": "test123",
-        "isDev": false,
+  },
+  {
+    "username": "ForagerFox",
+    "email": "foragerfox@latticefungi.com",
+    "password": "test123",
+    "isDev": false,
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
-      },
-      {
-        "username": "HiddenHyphae",
-        "email": "hiddenhyphae@latticefungi.com",
-        "password": "test123",
-        "isDev": false,
+  },
+  {
+    "username": "HiddenHyphae",
+    "email": "hiddenhyphae@latticefungi.com",
+    "password": "test123",
+    "isDev": false,
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
-      },
-      {
-       "username": "TruffleTroubadour",
-        "email": "truffletroubadour@latticefungi.com",
-        "password": "test123",
-        "isDev": false,
+  },
+  {
+    "username": "TruffleTroubadour",
+    "email": "truffletroubadour@latticefungi.com",
+    "password": "test123",
+    "isDev": false,
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
-      },
-      {
-        "username": "PuffballPal",
-        "email": "puffballpal@latticefungi.com",
-        "password": "test123",
-        "isDev": false,
+  },
+  {
+    "username": "PuffballPal",
+    "email": "puffballpal@latticefungi.com",
+    "password": "test123",
+    "isDev": false,
     "bio": "",
     "profilePhoto": "https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png",
     "following": [],
+    "followers": [],
     "thoughts": [],
     "friends": []
-      }
-  ]
-  
+  }
+]

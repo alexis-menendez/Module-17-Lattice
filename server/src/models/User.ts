@@ -12,6 +12,7 @@ export interface IUser {
   thoughts: Types.ObjectId[];
   friends: Types.ObjectId[];
   following: Types.ObjectId[];
+  followers: Types.ObjectId[]; 
   isDev?: boolean;
 }
 
@@ -65,6 +66,12 @@ const userSchema = new Schema<UserDocument>(
         ref: 'User',
       },
     ],
+    followers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     toJSON: {
@@ -80,8 +87,19 @@ const userSchema = new Schema<UserDocument>(
 );
 
 // Virtuals must use UserDocument
+// friendCount
 userSchema.virtual('friendCount').get(function (this: UserDocument) {
   return this.friends.length;
+});
+
+// followersCount
+userSchema.virtual('followersCount').get(function (this: UserDocument) {
+  return this.followers.length;
+});
+
+// followingCount
+userSchema.virtual('followingCount').get(function (this: UserDocument) {
+  return this.following.length;
 });
 
 // Model should be based on UserDocument

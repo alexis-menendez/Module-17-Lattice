@@ -1,6 +1,7 @@
 // Module-17-Lattice/server/src/seeds/user-seeds.ts
 
 import bcrypt from 'bcrypt';
+import User from '../models/User.js';
 
 const defaultProfilePhoto = 'https://res.cloudinary.com/lattice-image-storage/image/upload/v1746027866/default-profile_zsz7v2.png';
 
@@ -13,6 +14,7 @@ export const users = await Promise.all([
     bio: "Explorer of mind and mycelium.",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -24,6 +26,7 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -35,6 +38,7 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -46,6 +50,7 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -57,6 +62,7 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -68,6 +74,7 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -79,6 +86,7 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -90,6 +98,7 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -101,6 +110,7 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -112,6 +122,7 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -123,6 +134,7 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -134,6 +146,7 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -145,6 +158,7 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -156,6 +170,7 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   },
@@ -167,10 +182,58 @@ export const users = await Promise.all([
     bio: "",
     profilePhoto: defaultProfilePhoto,
     following: [],
+    followers: [],
     thoughts: [],
     friends: []
   }
+  
 ].map(async (user) => ({
   ...user,
-  password: await bcrypt.hash(user.password, 10)
-})));
+  password: await bcrypt.hash(user.password, 10),
+  following: [],  
+  followers: [],
+  thoughts: [],
+  friends: []
+  }))
+);
+
+// Insert into database and get _id references
+const insertedUsers = await User.insertMany(users);
+
+// Create a map for easy reference
+const userMap = Object.fromEntries(
+  insertedUsers.map((user) => [user.username, user._id])
+);
+
+// Update following/followers relationships
+const updates = [];
+
+for (const user of insertedUsers as any[]) {
+  if (user.username === 'WhimsyWoods') {
+    user.following = [
+      userMap['MycoMama'],
+      userMap['SporeLore'],
+    ];
+    user.followers = [
+      userMap['CapCollector'],
+    ];
+    updates.push(user.save());
+  }
+
+  if (user.username === 'MycoMama') {
+    user.followers.push(userMap['WhimsyWoods']);
+    updates.push(user.save());
+  }
+
+  if (user.username === 'SporeLore') {
+    user.followers.push(userMap['WhimsyWoods']);
+    updates.push(user.save());
+  }
+
+  if (user.username === 'CapCollector') {
+    user.following.push(userMap['WhimsyWoods']);
+    updates.push(user.save());
+  }
+}
+
+await Promise.all(updates);

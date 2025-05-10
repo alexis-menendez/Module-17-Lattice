@@ -11,7 +11,7 @@
     "seed": "node dist/seeds/index.js",
     "test": "jest --detectOpenHandles",
     "clean": "npx rimraf node_modules dist tsconfig.tsbuildinfo package-lock.json",
-    "clean-rebuild": "npx rimraf node_modules dist tsconfig.tsbuildinfo package-lock.json && npm install && npm run build"
+    "clean:rebuild": "npx rimraf node_modules dist tsconfig.tsbuildinfo package-lock.json && npm install && npm run build"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

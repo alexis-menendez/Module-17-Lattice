@@ -6,23 +6,8 @@ import ThoughtCard from './ThoughtCard';
 import LoadingSpinner from '../common/LoadingSpinner';
 import layoutStyles from '../../assets/css/layout/Layout.module.css';
 import { retrieveThoughts } from '../../api/thoughtAPI';
+import { Thought } from '../../interfaces/ThoughtData';
 import Auth from '../../utils/auth';
-
-interface Reaction {
-  reactionBody: string;
-  username: string;
-  createdAt: string;
-}
-
-interface Thought {
-  id: string;
-  thoughtText: string;
-  username: string;
-  createdAt: string;
-  reactionCount: number;
-  visibility: string;
-  reactions: Reaction[];
-}
 
 const AllThoughts: React.FC = () => {
   const [thoughts, setThoughts] = useState<Thought[]>([]);
@@ -50,7 +35,7 @@ const AllThoughts: React.FC = () => {
         const allThoughts = await retrieveThoughts();
 
         const formattedThoughts: Thought[] = allThoughts.map((thought: any) => ({
-          id: thought._id,
+          _id: thought._id,
           thoughtText: thought.thoughtText,
           username: thought.username,
           createdAt: thought.createdAt,
@@ -59,7 +44,9 @@ const AllThoughts: React.FC = () => {
           reactions: thought.reactions || [],
         }));
 
-        formattedThoughts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        formattedThoughts.sort(
+          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
 
         setThoughts(formattedThoughts);
       } catch (err) {
@@ -109,7 +96,7 @@ const AllThoughts: React.FC = () => {
       ) : (
         <div className={layoutStyles.responsiveGrid}>
           {thoughts.map((thought) => (
-            <ThoughtCard key={thought.id} thought={thought} showReactions={false} />
+            <ThoughtCard key={thought._id} thought={thought} showReactions={false} />
           ))}
         </div>
       )}

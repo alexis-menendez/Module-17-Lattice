@@ -1,23 +1,29 @@
 // client/src/interfaces/ThoughtData.ts
 
-export interface ThoughtData {
-  id: string | null;
-  thoughtText: string | null;
-  username: string | null;
-  createdAt: string | null;
-  reactionCount: number | null;
-  visibility: string | null;
-  reactions: Array<Record<string, unknown>> | null;
+export interface Reaction {
+  _id: string;
+  reactionBody: string;
+  username: string;
+  createdAt: string;
 }
 
-const defaultThoughtData: ThoughtData = {
-  id: null,
-  thoughtText: null,
-  username: null,
-  createdAt: null,
-  reactionCount: null,
-  visibility: null,
-  reactions: null,
-};
+export interface Thought {
+  _id: string;
+  thoughtText: string;
+  username: string;
+  createdAt: string;
+  reactionCount: number;
+  visibility: string;
+  reactions: Reaction[];
+}
 
-export default defaultThoughtData;
+// Fallback state values
+export const defaultThought: Thought = {
+  _id: '',
+  thoughtText: '',
+  username: '',
+  createdAt: '',
+  reactionCount: 0,
+  visibility: 'public',
+  reactions: [],
+};

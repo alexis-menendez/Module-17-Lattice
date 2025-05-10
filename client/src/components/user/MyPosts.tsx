@@ -1,29 +1,13 @@
 // client/src/components/user/MyPosts.tsx
 
+import Auth from '../../utils/auth';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Thought } from '../../interfaces/ThoughtData';
+import { fetchMyThoughts } from '../../api/thoughtAPI';
 import ThoughtCard from '../thoughts/ThoughtCard';
 import LoadingSpinner from '../common/LoadingSpinner';
 import layoutStyles from '../../assets/css/layout/Layout.module.css';
-import Auth from '../../utils/auth';
-import { fetchMyThoughts } from '../../api/thoughtAPI';
-
-interface Reaction {
-  reactionBody: string;
-  username: string;
-  createdAt: string;
-  _id: string;
-}
-
-interface Thought {
-  id: string;
-  thoughtText: string;
-  username: string;
-  createdAt: string;
-  reactionCount: number;
-  visibility: string;
-  reactions: Reaction[];
-}
 
 const MyPosts: React.FC = () => {
   const [thoughts, setThoughts] = useState<Thought[]>([]);
@@ -43,7 +27,7 @@ const MyPosts: React.FC = () => {
         const myThoughts = await fetchMyThoughts();
 
         const formattedThoughts: Thought[] = myThoughts.map((thought: any) => ({
-          id: thought._id,
+          _id: thought._id,
           thoughtText: thought.thoughtText,
           username: thought.username,
           createdAt: thought.createdAt,
@@ -98,7 +82,7 @@ const MyPosts: React.FC = () => {
       ) : (
         <div className={layoutStyles.responsiveGrid}>
           {thoughts.map((thought) => (
-            <ThoughtCard key={thought.id} thought={thought} showReactions={false} />
+            <ThoughtCard key={thought._id} thought={thought} showReactions={false} />
           ))}
         </div>
       )}

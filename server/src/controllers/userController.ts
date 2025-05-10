@@ -78,72 +78,6 @@ export const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
-// Add a friend
-export const addFriend = async (req: Request, res: Response) => {
-  const { userId, friendId } = req.params;
-
-  try {
-    const user = await User.findByIdAndUpdate(
-      userId,
-      { $addToSet: { friends: friendId } },
-      { new: true }
-    ).lean();
-
-    if (!user) {
-      return res.status(404).json({ message: 'No user with that ID' });
-    }
-
-    return res.json(sanitizeUser(user));
-  } catch (error) {
-    return res.status(500).json({ message: 'Error adding friend' });
-  }
-};
-
-// Remove a friend
-export const removeFriend = async (req: Request, res: Response) => {
-  const { userId, friendId } = req.params;
-
-  try {
-    const user = await User.findByIdAndUpdate(
-      userId,
-      { $pull: { friends: friendId } },
-      { new: true }
-    ).lean();
-
-    if (!user) {
-      return res.status(404).json({ message: 'No user with that ID' });
-    }
-
-    return res.json(sanitizeUser(user));
-  } catch (error) {
-    return res.status(500).json({ message: 'Error removing friend' });
-  }
-};
-
-// Get list of friends for a user
-export const getFriends = async (req: Request, res: Response) => {
-  const { userId } = req.params;
-
-  try {
-    const user = await User.findById(userId)
-      .populate('friends', 'username profilePhoto bio')
-      .lean();
-
-    if (!user) {
-      return res.status(404).json({ message: 'No user with that ID' });
-    }
-
-    const friends = (user.friends || []).map((friend: any) => ({
-      ...friend,
-      _id: friend._id.toString()
-    }));
-
-    return res.json(friends);
-  } catch (error) {
-    return res.status(500).json({ message: 'Error retrieving friends' });
-  }
-};
-
 // Get logged-in user's profile
 export const getMyProfile = async (req: Request, res: Response) => {
   try {
@@ -206,5 +140,166 @@ export const uploadProfilePhoto = async (req: Request, res: Response) => {
     return res.json(sanitizeUser(updatedUser));
   } catch (err) {
     return res.status(500).json(err);
+  }
+};
+
+// Add a friend
+export const addFriend = async (req: Request, res: Response) => {
+  const { userId, friendId } = req.params;
+
+  try {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $addToSet: { friends: friendId } },
+      { new: true }
+    ).lean();
+
+    if (!user) {
+      return res.status(404).json({ message: 'No user with that ID' });
+    }
+
+    return res.json(sanitizeUser(user));
+  } catch (error) {
+    return res.status(500).json({ message: 'Error adding friend' });
+  }
+};
+
+// Remove a friend
+export const removeFriend = async (req: Request, res: Response) => {
+  const { userId, friendId } = req.params;
+
+  try {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { friends: friendId } },
+      { new: true }
+    ).lean();
+
+    if (!user) {
+      return res.status(404).json({ message: 'No user with that ID' });
+    }
+
+    return res.json(sanitizeUser(user));
+  } catch (error) {
+    return res.status(500).json({ message: 'Error removing friend' });
+  }
+};
+
+// Get list of friends for a user
+export const getFriendsList = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId)
+      .populate('friends', 'username profilePhoto bio')
+      .lean();
+
+    if (!user) {
+      return res.status(404).json({ message: 'No user with that ID' });
+    }
+
+    const friends = (user.friends || []).map((friend: any) => ({
+      ...friend,
+      _id: friend._id.toString()
+    }));
+
+    return res.json(friends);
+  } catch (error) {
+    return res.status(500).json({ message: 'Error retrieving friends' });
+  }
+};
+
+// Follow another user
+export const followUser = async (req: Request, res: Response) => {
+  try {
+    const followerId = req.user!._id;
+    const followedId = req.params.userId;
+
+    // Prevent self-following
+    if (followerId.toString() === followedId) {
+      return res.status(400).json({ message: "You cannot follow yourself." });
+    }
+
+    // Add to 'following' of current user
+    await User.findByIdAndUpdate(followerId, {
+      $addToSet: { following: followedId }
+    });
+
+    // Add to 'followers' of target user
+    await User.findByIdAndUpdate(followedId, {
+      $addToSet: { followers: followerId }
+    });
+
+    return res.json({ message: 'Followed user successfully' });
+  } catch (error) {
+    console.error('Error following user:', error);
+    return res.status(500).json({ message: 'Failed to follow user' });
+  }
+};
+
+// Unfollow a user
+export const unfollowUser = async (req: Request, res: Response) => {
+  try {
+    const followerId = req.user!._id;
+    const unfollowedId = req.params.userId;
+
+    await User.findByIdAndUpdate(followerId, {
+      $pull: { following: unfollowedId }
+    });
+
+    await User.findByIdAndUpdate(unfollowedId, {
+      $pull: { followers: followerId }
+    });
+
+    return res.json({ message: 'Unfollowed user successfully' });
+  } catch (error) {
+    console.error('Error unfollowing user:', error);
+    return res.status(500).json({ message: 'Failed to unfollow user' });
+  }
+};
+
+// Get list of followers for logged-in user
+export const getFollowersList = async (req: Request, res: Response) => {
+  try {
+    const user = await User.findById(req.user!._id)
+      .populate('followers', 'username profilePhoto bio')
+      .lean();
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const followers = (user.followers || []).map((f: any) => ({
+      ...f,
+      _id: f._id.toString()
+    }));
+
+    return res.json(followers);
+  } catch (error) {
+    console.error('Error retrieving followers:', error);
+    return res.status(500).json({ message: 'Failed to retrieve followers list' });
+  }
+};
+
+// Get list of people the user is following
+export const getFollowingList = async (req: Request, res: Response) => {
+  try {
+    const user = await User.findById(req.user!._id)
+      .populate('following', 'username profilePhoto bio')
+      .lean();
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const following = (user.following || []).map((f: any) => ({
+      ...f,
+      _id: f._id.toString()
+    }));
+
+    return res.json(following);
+  } catch (error) {
+    console.error('Error retrieving following:', error);
+    return res.status(500).json({ message: 'Failed to retrieve following list' });
   }
 };

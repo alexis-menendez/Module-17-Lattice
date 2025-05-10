@@ -5,16 +5,20 @@ const router = Router();
 
 import { 
   getUsers,
-  getSingleUser,   
-  createUser, 
+  getSingleUser,
+  createUser,
   updateUser,
-  deleteUser,  
-  addFriend,   
-  removeFriend,   
-  getFriends,
+  deleteUser,
+  addFriend,
+  removeFriend,
+  getFriendsList,
   getMyProfile,
   updateMyProfile,
-  uploadProfilePhoto
+  uploadProfilePhoto,
+  followUser,
+  unfollowUser,
+  getFollowingList,
+  getFollowersList
 } from '../../controllers/userController.js';
 import { authMiddleware } from '../../middleware/auth.js';
 import { authenticateToken } from '../../middleware/auth.js'; 
@@ -46,15 +50,25 @@ router.route('/:userId')
   .delete(deleteUser);
 
 // Routes for user's friends
-router.route('/:userId/friends')
-  .get(getFriends);
+router.route('/friends')
+  .get(authenticateToken, getFriendsList)
 
-router.route('/:userId/friends/:friendId')
-  .post(addFriend)
-  .delete(removeFriend);
+router.route('/friends/:friendID')
+  .post(authenticateToken, addFriend);
 
-router.get('/:userId/friends', getFriends);
-router.post('/:userId/friends/:friendId', addFriend);
-router.delete('/:userId/friends/:friendId', removeFriend);
+router.route('/friends/:friendID')
+  .delete(authenticateToken, removeFriend);
+
+router.get('/friends', authMiddleware, getFriendsList); 
+router.post('/friends/:friendID', authMiddleware, addFriend);
+router.delete('/friends/:friendID', authMiddleware, removeFriend);
+
+// Follow/unfollow another user
+router.post('/follow/:userId', authenticateToken, followUser);
+router.delete('/unfollow/:userId', authenticateToken, unfollowUser);
+
+// Get following and followers for logged-in user
+router.get('/following', authenticateToken, getFollowingList);
+router.get('/followers', authenticateToken, getFollowersList);
 
 export default router;

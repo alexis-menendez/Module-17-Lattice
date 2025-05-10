@@ -68,4 +68,24 @@ const fetchMyProfile = async (): Promise<UserProfile> => {
   }
 };
 
+// Retrieve the logged-in user's friends
+export const fetchFriends = async () => {
+  const token = Auth.getToken();
+
+  const response = await fetch('/api/users/friends', {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Failed to fetch friends');
+  }
+
+  return response.json();
+};
+
+
 export { retrieveUsers, fetchMyProfile };

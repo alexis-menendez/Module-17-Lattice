@@ -10,7 +10,7 @@ export interface ThoughtPayload {
 }
 
 export interface ThoughtResponse {
-  _id: string;
+  id: string;
   thoughtText: string;
   username: string;
   createdAt: string;
@@ -37,6 +37,7 @@ const retrieveThoughts = async (): Promise<ThoughtResponse[]> => {
   }
 };
 
+// Retrieve single thought
 const retrieveThought = async (id: string): Promise<ThoughtResponse> => {
   try {
     const response = await fetch(`${API_BASE_URL}/${id}`, {
@@ -55,6 +56,8 @@ const retrieveThought = async (id: string): Promise<ThoughtResponse> => {
   }
 };
 
+
+// Create thought
 const createThought = async (body: ThoughtPayload): Promise<ThoughtResponse> => {
   try {
     const response = await fetch(`${API_BASE_URL}`, {
@@ -75,6 +78,7 @@ const createThought = async (body: ThoughtPayload): Promise<ThoughtResponse> => 
   }
 };
 
+// Update thought
 const updateThought = async (thoughtId: string, body: Partial<ThoughtPayload>): Promise<ThoughtResponse> => {
   try {
     const response = await fetch(`${API_BASE_URL}/${thoughtId}`, {
@@ -95,6 +99,7 @@ const updateThought = async (thoughtId: string, body: Partial<ThoughtPayload>): 
   }
 };
 
+// Delete thought
 const deleteThought = async (thoughtId: string): Promise<{ message: string }> => {
   try {
     const response = await fetch(`${API_BASE_URL}/${thoughtId}`, {
@@ -114,6 +119,7 @@ const deleteThought = async (thoughtId: string): Promise<{ message: string }> =>
   }
 };
 
+// Retrieve all thoughts authored by the user
 const fetchMyThoughts = async (): Promise<ThoughtResponse[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/mine`, {
@@ -132,6 +138,7 @@ const fetchMyThoughts = async (): Promise<ThoughtResponse[]> => {
   }
 };
 
+// Retrieve all thoughts from friends of the user
 const fetchFriendsThoughts = async (): Promise<ThoughtResponse[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/friends`, {
@@ -150,6 +157,7 @@ const fetchFriendsThoughts = async (): Promise<ThoughtResponse[]> => {
   }
 };
 
+// Retrieve all thoughts from users the user is following
 const fetchFollowingThoughts = async (): Promise<ThoughtResponse[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/following`, {
@@ -168,6 +176,7 @@ const fetchFollowingThoughts = async (): Promise<ThoughtResponse[]> => {
   }
 };
 
+// Retrieve all public thoughts
 const fetchPublicThoughts = async (): Promise<ThoughtResponse[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/public`, {
