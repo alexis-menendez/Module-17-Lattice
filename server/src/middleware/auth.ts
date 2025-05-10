@@ -4,6 +4,8 @@ import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload as DefaultJwtPayload } from 'jsonwebtoken';
 import User from '../models/User.js'; // Required in ESM
 
+
+
 interface CustomJwtPayload extends DefaultJwtPayload {
   _id: string;
   username: string;
@@ -11,44 +13,37 @@ interface CustomJwtPayload extends DefaultJwtPayload {
 
 declare module 'express-serve-static-core' {
   interface Request {
-    user?: any; // You can replace `any` with a more specific UserDocument type if you define it
+    user?: any; // Replace `any` with a Mongoose User type???
   }
 }
 
-export const authenticateToken = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
+export const authenticateToken = async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    res.status(401).json({ message: 'Missing authorization header' });
-    return;
+    return res.status(401).json({ message: 'Missing authorization header' });
   }
 
   const token = authHeader.split(' ')[1];
   const secretKey = process.env.JWT_SECRET_KEY;
 
   if (!secretKey) {
-    res.status(500).json({ message: 'Server misconfiguration: missing JWT secret' });
-    return;
+    return res.status(500).json({ message: 'Server misconfiguration: missing JWT secret' });
   }
 
   try {
     const decoded = jwt.verify(token, secretKey) as CustomJwtPayload;
-
+    
     const user = await User.findById(decoded._id);
     if (!user) {
-      res.status(404).json({ message: 'User not found' });
-      return;
+      return res.status(404).json({ message: 'User not found' });
     }
 
-    req.user = user;
-    next();
+    req.user = user; 
+    return next();
   } catch (err) {
     console.error('[authMiddleware] Token error:', err);
-    res.status(403).json({ message: 'Invalid or expired token' });
+    return res.status(403).json({ message: 'Invalid or expired token' });
   }
 };
 

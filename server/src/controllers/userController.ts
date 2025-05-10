@@ -1,3 +1,5 @@
+// Module-17-Lattice/server/src/controllers/userController.ts
+
 import { User } from '../models/index.js';
 import { Request, Response } from 'express';
 
@@ -12,41 +14,40 @@ const sanitizeUser = (user: any) => {
 };
 
 // Get all users
-export const getUsers = async (_req: Request, res: Response): Promise<void> => {
+export const getUsers = async (_req: Request, res: Response) => {
   try {
     const users = await User.find().lean();
-    res.json(users.map(sanitizeUser));
+    return res.json(users.map(sanitizeUser));
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 };
 
-// Get a single user by ID
-export const getSingleUser = async (req: Request, res: Response): Promise<void> => {
+// Get a single user by ID (public profile)
+export const getSingleUser = async (req: Request, res: Response) => {
   try {
     const user = await User.findById(req.params.userId).lean();
     if (!user) {
-      res.status(404).json({ message: 'No user with that ID' });
-      return;
+      return res.status(404).json({ message: 'No user with that ID' });
     }
-    res.json(sanitizeUser(user));
+    return res.json(sanitizeUser(user));
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 };
 
-// Create a user (admin use)
-export const createUser = async (req: Request, res: Response): Promise<void> => {
+// Create a new user (rarely used now since you have signup)
+export const createUser = async (req: Request, res: Response) => {
   try {
     const user = await User.create(req.body);
-    res.json(sanitizeUser(user.toObject()));
+    return res.json(sanitizeUser(user.toObject()));
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 };
 
-// Update a user by ID
-export const updateUser = async (req: Request, res: Response): Promise<void> => {
+// Update a user by ID (admin use — not "me" updates)
+export const updateUser = async (req: Request, res: Response) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.userId,
@@ -55,33 +56,32 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
     ).lean();
 
     if (!updatedUser) {
-      res.status(404).json({ message: 'No user with that ID' });
-      return;
+      return res.status(404).json({ message: 'No user with that ID' });
     }
 
-    res.json(sanitizeUser(updatedUser));
+    return res.json(sanitizeUser(updatedUser));
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 };
 
-// Delete a user
-export const deleteUser = async (req: Request, res: Response): Promise<void> => {
+// Delete a user by ID
+export const deleteUser = async (req: Request, res: Response) => {
   try {
     const user = await User.findByIdAndDelete(req.params.userId).lean();
     if (!user) {
-      res.status(404).json({ message: 'No user with that ID' });
-      return;
+      return res.status(404).json({ message: 'No user with that ID' });
     }
-    res.json({ message: 'User successfully deleted!' });
+    return res.json({ message: 'User successfully deleted!' });
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 };
 
 // Add a friend
-export const addFriend = async (req: Request, res: Response): Promise<void> => {
+export const addFriend = async (req: Request, res: Response) => {
   const { userId, friendId } = req.params;
+
   try {
     const user = await User.findByIdAndUpdate(
       userId,
@@ -90,19 +90,19 @@ export const addFriend = async (req: Request, res: Response): Promise<void> => {
     ).lean();
 
     if (!user) {
-      res.status(404).json({ message: 'No user with that ID' });
-      return;
+      return res.status(404).json({ message: 'No user with that ID' });
     }
 
-    res.json(sanitizeUser(user));
+    return res.json(sanitizeUser(user));
   } catch (error) {
-    res.status(500).json({ message: 'Error adding friend' });
+    return res.status(500).json({ message: 'Error adding friend' });
   }
 };
 
 // Remove a friend
-export const removeFriend = async (req: Request, res: Response): Promise<void> => {
+export const removeFriend = async (req: Request, res: Response) => {
   const { userId, friendId } = req.params;
+
   try {
     const user = await User.findByIdAndUpdate(
       userId,
@@ -111,27 +111,26 @@ export const removeFriend = async (req: Request, res: Response): Promise<void> =
     ).lean();
 
     if (!user) {
-      res.status(404).json({ message: 'No user with that ID' });
-      return;
+      return res.status(404).json({ message: 'No user with that ID' });
     }
 
-    res.json(sanitizeUser(user));
+    return res.json(sanitizeUser(user));
   } catch (error) {
-    res.status(500).json({ message: 'Error removing friend' });
+    return res.status(500).json({ message: 'Error removing friend' });
   }
 };
 
-// Get a user's friends
-export const getFriends = async (req: Request, res: Response): Promise<void> => {
+// Get list of friends for a user
+export const getFriends = async (req: Request, res: Response) => {
   const { userId } = req.params;
+
   try {
     const user = await User.findById(userId)
       .populate('friends', 'username profilePhoto bio')
       .lean();
 
     if (!user) {
-      res.status(404).json({ message: 'No user with that ID' });
-      return;
+      return res.status(404).json({ message: 'No user with that ID' });
     }
 
     const friends = (user.friends || []).map((friend: any) => ({
@@ -139,30 +138,29 @@ export const getFriends = async (req: Request, res: Response): Promise<void> => 
       _id: friend._id.toString()
     }));
 
-    res.json(friends);
+    return res.json(friends);
   } catch (error) {
-    res.status(500).json({ message: 'Error retrieving friends' });
+    return res.status(500).json({ message: 'Error retrieving friends' });
   }
 };
 
-// Get the logged-in user's profile
-export const getMyProfile = async (req: Request, res: Response): Promise<void> => {
+// Get logged-in user's profile
+export const getMyProfile = async (req: Request, res: Response) => {
   try {
     const user = await User.findById(req.user!._id).lean();
 
     if (!user) {
-      res.status(404).json({ message: 'User not found' });
-      return;
+      return res.status(404).json({ message: 'User not found' });
     }
 
-    res.json(sanitizeUser(user));
+    return res.json(sanitizeUser(user));
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 };
 
 // Update logged-in user's profile
-export const updateMyProfile = async (req: Request, res: Response): Promise<void> => {
+export const updateMyProfile = async (req: Request, res: Response) => {
   try {
     const { username, bio, profilePhoto } = req.body;
 
@@ -177,24 +175,22 @@ export const updateMyProfile = async (req: Request, res: Response): Promise<void
     ).lean();
 
     if (!updatedUser) {
-      res.status(404).json({ message: 'User not found' });
-      return;
+      return res.status(404).json({ message: 'User not found' });
     }
 
-    res.json(sanitizeUser(updatedUser));
+    return res.json(sanitizeUser(updatedUser));
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 };
 
-// Upload profile photo
-export const uploadProfilePhoto = async (req: Request, res: Response): Promise<void> => {
+// Upload profile photo separately
+export const uploadProfilePhoto = async (req: Request, res: Response) => {
   try {
     const { profilePhoto } = req.body;
 
     if (!profilePhoto) {
-      res.status(400).json({ message: 'Profile photo URL required.' });
-      return;
+      return res.status(400).json({ message: 'Profile photo URL required.' });
     }
 
     const updatedUser = await User.findByIdAndUpdate(
@@ -204,12 +200,11 @@ export const uploadProfilePhoto = async (req: Request, res: Response): Promise<v
     ).lean();
 
     if (!updatedUser) {
-      res.status(404).json({ message: 'User not found' });
-      return;
+      return res.status(404).json({ message: 'User not found' });
     }
 
-    res.json(sanitizeUser(updatedUser));
+    return res.json(sanitizeUser(updatedUser));
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 };
