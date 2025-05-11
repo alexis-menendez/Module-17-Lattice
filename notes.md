@@ -11,3 +11,9 @@ WORKING:
 
 NOT WORKING:
 - API calls for My posts, friends feed, following feed, and public feed
+
+NEED TO WORK ON:
+- My posts
+- Friends feed
+- Following feed
+- Public feed
