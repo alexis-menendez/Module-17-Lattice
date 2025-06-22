@@ -20,7 +20,6 @@ Users will be able to:
 * Add and remove friends
 * Navigate protected routes based on authentication
 * Interact with a RESTful backend API and custom UI components
-* This tool is ideal for students, developers, and project managers seeking a simple, extensible task board experience.
 
 | **Key Features**                               | **Technology Stack**                                                                                                                      |
 | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
